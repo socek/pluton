@@ -1,0 +1,5 @@
+pluton.dashboard.controllers:
+    -
+        controller: Dashboard
+        route: dashboard
+        url: /
