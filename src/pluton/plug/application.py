@@ -74,6 +74,9 @@ class Application(object):
         self.settings['project'] = self.Config.module
         self.paths['project'] = path.dirname(module.__file__)
 
+        for plug in self.app_plugs:
+            plug.populate_default_settings()
+
     def _create_config(self):
         kwargs = self._get_config_kwargs()
         self.config = Configurator(**kwargs)
@@ -87,9 +90,13 @@ class Application(object):
         }
 
     def _generate_registry(self, registry):
+        self.registry = registry
         registry['settings'] = self.settings
         registry['paths'] = self.paths
         registry['application'] = self
+
+        for plug in self.app_plugs:
+            plug.generate_registry(registry)
 
     def _create_routing(self):
         self.routing = self.Config.routing_cls(self)

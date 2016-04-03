@@ -2,6 +2,7 @@ from pluton.plug.application import Application
 
 from .routing import PlutonRouting
 from pluton.plug.jinja2.app import Jinja2AppPlug
+from pluton.plug.sqlalchemy.app import SqlAlchemyPlug
 
 
 class PlutonApplication(Application):
@@ -11,7 +12,8 @@ class PlutonApplication(Application):
         module = 'pluton'
 
     def create_plugs(self):
-        self.jinja2 = self.add_plug(Jinja2AppPlug)
+        self.add_plug(Jinja2AppPlug)
+        self.add_plug(SqlAlchemyPlug)
 
 
 main = PlutonApplication()

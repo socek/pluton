@@ -8,3 +8,9 @@ class AppPlug(object):
 
     def create_config(self):
         pass
+
+    def populate_default_settings(self):
+        pass
+
+    def generate_registry(self, registry):
+        pass

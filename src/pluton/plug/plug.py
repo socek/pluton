@@ -29,16 +29,24 @@ class Plug(object):
     def create_plugs(self):
         pass
 
+    @property
+    def registry(self):
+        return self.application.registry
+
+    @property
+    def settings(self):
+        return self.registry['settings']
+
+    @property
+    def paths(self):
+        return self.registry['paths']
+
 
 class RequestPlug(Plug):
 
     def feed_parent(self, parent):
         self.request = parent.request
         super().feed_parent(parent)
-
-    @property
-    def registry(self):
-        return self.request.registry
 
     @property
     def POST(self):
@@ -55,11 +63,3 @@ class RequestPlug(Plug):
     @property
     def route_path(self):
         return self.request.route_path
-
-    @property
-    def settings(self):
-        return self.registry['settings']
-
-    @property
-    def paths(self):
-        return self.registry['paths']

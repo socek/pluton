@@ -1,6 +1,6 @@
 def make_settings(settings, paths):
     project(settings, paths)
-    # database(settings, paths)
+    database(settings, paths)
     debug(settings, paths)
 
 
@@ -20,13 +20,11 @@ def database(settings, paths):
 
 
 def project(settings, paths):
-    pass
     paths.set_path('maindir', 'project', '../..')
     paths.set_path('data', 'maindir', 'data')
 
     paths.set_path('application', 'project', 'application')
     paths.set_path('routing', 'application', 'routing.yaml')
-    settings['ga'] = 'UA-15178164-3'
 
 
 # def alembic(settings, paths):
