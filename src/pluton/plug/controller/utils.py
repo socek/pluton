@@ -8,7 +8,7 @@ class ControllerUtils(RequestPlug):
 
     def redirect(self, to, quit=False, **kwargs):
         url = self.request.route_url(to, **kwargs)
-        self.response = HTTPFound(
+        self.main.response = HTTPFound(
             location=url,
             headers=self.request.response.headerlist,
         )

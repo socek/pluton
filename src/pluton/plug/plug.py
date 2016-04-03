@@ -8,6 +8,13 @@ class Plug(object):
     def plugs(self):
         return self.application.plugs
 
+    @property
+    def main(self):
+        if getattr(self, 'parent', None):
+            return self.parent.main
+        else:
+            return self
+
     def add_plug(self, cls):
         if cls.__name__ not in self.plugs:
             self.plugs[cls.__name__] = cls()
