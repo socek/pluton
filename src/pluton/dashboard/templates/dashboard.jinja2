@@ -1,2 +1,6 @@
 Hello|{{ctrl}}|
 <a href="{{route_path('dashboard_second')}}">Wack</a>
+
+{% for client in clients %}
+    <p>Name: {{client.name}}| Id: {{client.id}}</p>
+{% endfor %}

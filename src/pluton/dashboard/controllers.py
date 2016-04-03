@@ -1,6 +1,6 @@
 from pluton.plug.controller import Controller
 from pluton.plug.controller import JsonController
-from pluton.plug.sqlalchemy.plug import DatabasePlug
+from pluton.dashboard.driver import ClientDriver
 
 
 class Dashboard(Controller):
@@ -8,11 +8,11 @@ class Dashboard(Controller):
 
     def create_plugs(self):
         super().create_plugs()
-        self.database = self.add_plug(DatabasePlug)
+        self.clients = self.add_plug(ClientDriver)
 
     def make(self):
-        print(self.database())
         self.context['ctrl'] = 'one'
+        self.context['clients'] = self.clients.find_all()
 
 
 class DashboardSecond(JsonController):

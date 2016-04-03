@@ -24,7 +24,6 @@ class SqlAlchemyPlug(AppPlug):
         self.parent.settings['db'] = dbsettings
 
     def generate_registry(self, registry):
-        print('re', self.parent.settings['db:url'])
         engine = create_engine(self.parent.settings['db:url'])
         registry['db_engine'] = engine
         registry['db'] = sessionmaker(bind=engine)()

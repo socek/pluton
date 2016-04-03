@@ -1,17 +1,15 @@
 from sqlalchemy.orm import sessionmaker
 
-from pluton.plug.plug import RequestPlug
+from pluton.plug.plug import Plug
 
 
-class DatabasePlug(RequestPlug):
+class DatabasePlug(Plug):
 
     def __call__(self):
-        if not getattr(self.main, '_database', None):
-            if self.settings['db']['type'] == 'sqlite':
-                self.main._database = self._get_sqlite_database()
-            else:
-                self.main._database = self._get_normal_database()
-        return self.main._database
+        if self.settings['db']['type'] == 'sqlite':
+            return self._get_sqlite_database()
+        else:
+            return self._get_normal_database()
 
     def _get_sqlite_database(self):
         engine = self.registry['db_engine']

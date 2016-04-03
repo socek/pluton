@@ -12,6 +12,7 @@ class Controller(RequestPlug):
         self.response = None
 
     def create_plugs(self):
+        super().create_plugs()
         self.utils = self.add_plug(ControllerUtils)
 
     def feed_request(self, request):

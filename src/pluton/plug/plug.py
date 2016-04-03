@@ -35,18 +35,22 @@ class Plug(object):
 
     @property
     def settings(self):
-        return self.registry['settings']
+        return self.application.settings
 
     @property
     def paths(self):
-        return self.registry['paths']
+        return self.application.paths
 
 
 class RequestPlug(Plug):
 
     def feed_parent(self, parent):
-        self.request = parent.request
+        self.request = parent.main.request
         super().feed_parent(parent)
+
+    @property
+    def registry(self):
+        return self.request.registry
 
     @property
     def POST(self):
