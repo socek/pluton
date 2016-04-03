@@ -1,7 +1,7 @@
-from .requestable import Requestable
+from .plug import RequestPlug
 
 
-class Widget(Requestable):
+class Widget(RequestPlug):
 
     def feed_request(self, request):
         super().feed_request(request)
@@ -11,6 +11,7 @@ class Widget(Requestable):
         self.context = {
             'request': self.request,
             'widget': self,
+            'route_path': self.request.route_path,
         }
 
     def add_widget(self, name, obj):

@@ -1,11 +1,12 @@
+from pluton.plug.controller import Controller
 from pluton.plug.controller import JsonController
 
 
-class Dashboard(JsonController):
+class Dashboard(Controller):
+    renderer = 'pluton.dashboard:templates/dashboard.jinja2'
 
     def make(self):
         self.context['ctrl'] = 'one'
-        self.utils.redirect('dashboard_second')
 
 
 class DashboardSecond(JsonController):

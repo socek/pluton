@@ -6,6 +6,9 @@ install_requires = [
     'morfdict>=0.3.7',
     'pyyaml',
 
+    'impaf',
+    'pyramid_jinja2',
+
     'waitress',
 ]
 

@@ -15,6 +15,16 @@ class Application(object):
 
     def __init__(self):
         self.plugs = {}
+        self.app_plugs = []
+        self.create_plugs()
+
+    def add_plug(self, cls):
+        obj = cls()
+        obj.feed_parent(self)
+        self.app_plugs.append(obj)
+
+    def create_plugs(self):
+        pass
 
     def __call__(self, settings={}):
         return self.run_uwsgi(settings)
@@ -53,6 +63,9 @@ class Application(object):
         self.settings = settings
         self.paths = paths
 
+        for plug in self.app_plugs:
+            plug.create_settings()
+
     def _get_settings_module(self):
         return '%s.application' % (self.Config.module, )
 
@@ -64,6 +77,9 @@ class Application(object):
     def _create_config(self):
         kwargs = self._get_config_kwargs()
         self.config = Configurator(**kwargs)
+
+        for plug in self.app_plugs:
+            plug.create_config()
 
     def _get_config_kwargs(self):
         return {
