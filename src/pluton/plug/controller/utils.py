@@ -1,9 +1,10 @@
 from pyramid.httpexceptions import HTTPFound
 
 from .exceptions import QuitController
+from pluton.plug.plug import RequestPlug
 
 
-class ControllerUtils(object):
+class ControllerUtils(RequestPlug):
 
     def redirect(self, to, quit=False, **kwargs):
         url = self.request.route_url(to, **kwargs)

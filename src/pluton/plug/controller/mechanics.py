@@ -1,13 +1,23 @@
-from .exceptions import QuitController, FinalizeController
-from pluton.plug.requestable import Requestable
+from .exceptions import FinalizeController
+from .exceptions import QuitController
+from .utils import ControllerUtils
+from pluton.plug.plug import RequestPlug
 
 
-class ControllerMechanics(Requestable):
+class ControllerMechanics(RequestPlug):
 
     def __init__(self, root_factory, request):
         self.feed_request(request)
         self.root_factory = root_factory
         self.response = None
+
+    def create_plugs(self):
+        self.utils = self.add_plug(ControllerUtils)
+
+    def feed_request(self, request):
+        self.application = request.registry['application']
+        self.request = request
+        self.create_plugs()
 
     def __call__(self):
         return self.run()

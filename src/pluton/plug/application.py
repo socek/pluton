@@ -14,7 +14,7 @@ class Application(object):
         module = None
 
     def __init__(self):
-        pass
+        self.plugs = {}
 
     def __call__(self, settings={}):
         return self.run_uwsgi(settings)

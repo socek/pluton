@@ -2,6 +2,7 @@ class Requestable(object):
 
     def feed_request(self, request):
         self.request = request
+        self.application = request.registry['application']
 
     @property
     def registry(self):
