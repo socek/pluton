@@ -4,7 +4,7 @@ from pluton.dashboard.driver import ClientDriver
 
 
 class Dashboard(Controller):
-    renderer = 'pluton.dashboard:templates/dashboard.jinja2'
+    renderer = 'pluton.dashboard:templates/dashboard.haml'
 
     def create_plugs(self):
         super().create_plugs()

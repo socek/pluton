@@ -10,6 +10,7 @@ install_requires = [
 
     'waitress',
     'SQLAlchemy',
+    'hamlish_jinja',
 ]
 
 
