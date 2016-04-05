@@ -1,7 +1,22 @@
 def make_settings(settings, paths):
     project(settings, paths)
+    session(settings, paths)
     database(settings, paths)
     debug(settings, paths)
+
+
+def session(settings, paths):
+    settings['session.type'] = 'file'
+    settings['session.key'] = 'needtochangethis'
+    settings['session.secret'] = 'needtochangethistoo'
+    settings['session.cookie_on_exception'] = True
+
+    paths['session'] = {
+        'data_dir': ["%(data)s", 'sessions', 'data'],
+        'lock_dir': ["%(data)s", 'sessions', 'lock'],
+    }
+    settings['session.data_dir'] = '%(paths:session:data_dir)s'
+    settings['session.lock_dir'] = '%(paths:session:lock_dir)s'
 
 
 def database(settings, paths):

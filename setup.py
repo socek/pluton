@@ -7,6 +7,7 @@ install_requires = [
     'pyyaml',
 
     'pyramid_jinja2',
+    'pyramid_beaker',
 
     'waitress',
     'SQLAlchemy',

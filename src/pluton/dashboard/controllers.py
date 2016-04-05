@@ -13,6 +13,9 @@ class Dashboard(Controller):
     def make(self):
         self.context['ctrl'] = 'one'
         self.context['clients'] = self.clients.find_all()
+        self.context['ses'] = self.request.session.get('ses', 0)
+        self.context['ses'] += 1
+        self.request.session['ses'] = self.context['ses']
 
 
 class DashboardSecond(JsonController):
