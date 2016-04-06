@@ -8,10 +8,12 @@ install_requires = [
 
     'pyramid_jinja2',
     'pyramid_beaker',
+    'formskit',
 
     'waitress',
     'SQLAlchemy',
     'hamlish_jinja',
+    'formskit',
 ]
 
 

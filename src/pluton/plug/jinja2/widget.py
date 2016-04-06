@@ -11,7 +11,7 @@ class BaseWidget(Widget):
         self.jinja2 = self.add_plug(Jinja2Plug)
 
     def render(self, renderer):
-        template = self.jinja2.env.get_template(self.renderer)
+        template = self.jinja2.env.get_template(renderer)
         return Markup(template.render(**self.context))
 
 
@@ -27,11 +27,7 @@ class SingleWidget(BaseWidget):
 
 class MultiWidget(BaseWidget):
 
-    class Templates(object):
-        pass
-
-    def render_for(self, name, context):
+    def render_for(self, path, context):
         self._create_context()
         self.context.update(context)
-        template = getattr(self.Templates, name)
-        return self.render(template)
+        return self.render(path)

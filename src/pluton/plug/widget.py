@@ -17,3 +17,4 @@ class Widget(RequestPlug):
     def add_widget(self, name, obj):
         obj.feed_request(self.request)
         self.context[name] = obj
+        print(self.context)

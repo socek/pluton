@@ -3,10 +3,11 @@ class Plug(object):
     def __init__(self):
         super().__init__()
         self.parent = None
+        self._plugs = {}
 
     @property
     def plugs(self):
-        return self.application.plugs
+        return self.main._plugs
 
     @property
     def main(self):

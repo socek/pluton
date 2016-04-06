@@ -16,5 +16,5 @@ class ControllerUtils(RequestPlug):
             raise QuitController(self.response)
 
     def add_widget(self, name, obj):
-        obj.feed_request(self.request)
-        self.context[name] = obj
+        obj.feed_parent(self)
+        self.main.context[name] = obj

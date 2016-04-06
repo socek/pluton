@@ -7,6 +7,7 @@ from ..plug import RequestPlug
 class Controller(RequestPlug):
 
     def __init__(self, root_factory, request):
+        super().__init__()
         self.feed_request(request)
         self.root_factory = root_factory
         self.response = None
