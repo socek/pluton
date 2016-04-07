@@ -2,6 +2,7 @@ def make_settings(settings, paths):
     project(settings, paths)
     session(settings, paths)
     database(settings, paths)
+    fanstatic(settings, paths)
     debug(settings, paths)
 
 
@@ -54,3 +55,10 @@ def debug(settings, paths):
     settings['pyramid.reload_templates'] = True
     settings['pyramid.debug_notfound'] = True
     settings['pyramid.debug_routematch'] = True
+
+
+def fanstatic(settings, paths):
+    settings['fanstatic'] = {
+        'bottom': True,
+        'debug': True,
+    }

@@ -14,6 +14,10 @@ install_requires = [
     'SQLAlchemy',
     'hamlish_jinja',
     'formskit',
+
+    'fanstatic',
+    'js.jquery',
+    'js.bootstrap',
 ]
 
 

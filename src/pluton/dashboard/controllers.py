@@ -1,9 +1,9 @@
-from pluton.plug.controller import Controller
-from pluton.plug.controller import JsonController
-from pluton.dashboard.driver import ClientDriver
-from pluton.plug.formskit.plug import FormskitPlug
+
 from pluton.plug.formskit.models import PostForm
 from pluton.plug.formskit.widget import FormWidget
+
+from pluton.application.controller import Controller
+from pluton.application.controller import JsonController
 
 
 class MyPostForm(PostForm):
@@ -19,11 +19,6 @@ class MyPostFormWidget(FormWidget):
 
 class Dashboard(Controller):
     renderer = 'pluton.dashboard:templates/dashboard.haml'
-
-    def create_plugs(self):
-        super().create_plugs()
-        self.clients = self.add_plug(ClientDriver)
-        self.forms = self.add_plug(FormskitPlug)
 
     def make(self):
         self.context['ctrl'] = 'one'

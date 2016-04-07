@@ -59,16 +59,20 @@ class Controller(RequestPlug):
             return self.response
 
     def _before_context(self):
-        pass
+        self._run_all_plugs('before_context')
 
     def _before_make(self):
-        pass
+        self._run_all_plugs('before_make')
 
     def _after_make(self):
-        pass
+        self._run_all_plugs('after_make')
 
     def _create_widgets(self):
-        pass
+        self._run_all_plugs('create_widgets')
 
     def _before_quit(self):
-        pass
+        self._run_all_plugs('before_quit')
+
+    def _run_all_plugs(self, name):
+        for plug in self.plugs.values():
+            getattr(plug, name, lambda: None)()

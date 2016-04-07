@@ -1,9 +1,12 @@
+from collections import OrderedDict
+
+
 class Plug(object):
 
     def __init__(self):
         super().__init__()
         self.parent = None
-        self._plugs = {}
+        self._plugs = OrderedDict()
 
     @property
     def plugs(self):

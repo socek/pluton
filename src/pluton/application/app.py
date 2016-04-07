@@ -1,4 +1,4 @@
-from pluton.plug.application import Application
+from pluton.plug.fanstatic.application import FanstaticApplication
 
 from .routing import PlutonRouting
 from pluton.plug.beaker import BeakerAppPlug
@@ -7,9 +7,9 @@ from pluton.plug.jinja2.app import Jinja2AppPlug
 from pluton.plug.sqlalchemy.app import SqlAlchemyPlug
 
 
-class PlutonApplication(Application):
+class PlutonApplication(FanstaticApplication):
 
-    class Config(Application.Config):
+    class Config(FanstaticApplication.Config):
         routing_cls = PlutonRouting
         module = 'pluton'
 
