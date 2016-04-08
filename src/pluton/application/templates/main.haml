@@ -1,0 +1,21 @@
+=need('bootstrap')
+=need('jquery')
+%html
+  %head
+    %title
+      Pluton - Simple Monitoring
+  %body
+    %div.navbar.navbar-default.navbar-inverse id="bs-example-navbar-collapse-2"
+      %div.container
+        %div.navbar-header
+          %a.navbar-brand href="{{route_path('dashboard')}}"
+            Pluton
+        %div.navbar-collapse.collapse id="navbar-main"
+          %ul.nav.navbar-nav
+            %li
+              %a href="{{route_path('dashboard')}}"
+                Dashboard
+    %div.container
+      %div.row
+        -block content
+

@@ -5,3 +5,6 @@ from .models import Client
 
 class ClientDriver(ModelDriver):
     model = Client
+
+    def list(self):
+        return self.find_all()

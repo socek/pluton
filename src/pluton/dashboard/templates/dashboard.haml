@@ -1,10 +1,10 @@
-=need('bootstrap')
-=need('jquery')
-%html
-  %head
-    %title
-      Pluton - Simple Monitoring
-  %body
-    Hello {{ses}}
-
-    =form()
+-extends "pluton.application:templates/main.haml"
+-block content
+  %div.col-lg-12
+    %div.bs-component
+      %h1
+        Clients
+      -for client in clients:
+        %div.jumbotron.jumbotron2
+          %h2
+            =client.name

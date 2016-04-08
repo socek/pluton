@@ -5,6 +5,7 @@ install_requires = [
     'pyramid',
     'morfdict>=0.3.7',
     'pyyaml',
+    'pyramid_ipython',
 
     'pyramid_jinja2',
     'pyramid_beaker',
@@ -17,7 +18,6 @@ install_requires = [
 
     'fanstatic',
     'js.jquery',
-    'js.bootstrap',
 ]
 
 
@@ -32,8 +32,11 @@ if __name__ == '__main__':
         package_dir={'': 'src'},
         install_requires=install_requires,
         entry_points={
+            'fanstatic.libraries': (
+                'main = pluton.application.resources:library',
+            ),
             'paste.app_factory': (
                 'main = pluton.application.app:main',
-            )
+            ),
         }
     )

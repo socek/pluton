@@ -1,10 +1,6 @@
 pluton.dashboard.controllers:
-    -
-        controller: Dashboard
-        route: dashboard
-        url: /
+  -
+    controller: Dashboard
+    route: dashboard
+    url: /
 
-    -
-        controller: DashboardSecond
-        route: dashboard_second
-        url: /second
