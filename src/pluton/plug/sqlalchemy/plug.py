@@ -12,8 +12,10 @@ class DatabasePlug(Plug):
             return self._get_normal_database()
 
     def _get_sqlite_database(self):
-        engine = self.registry['db_engine']
-        return sessionmaker(bind=engine)()
+        if not getattr(self, 'db', None):
+            engine = self.registry['db_engine']
+            self.db = sessionmaker(bind=engine)()
+        return self.db
 
     def _get_normal_database(self):
         db = self.registry['db']
