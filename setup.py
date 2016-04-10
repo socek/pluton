@@ -12,10 +12,12 @@ install_requires = [
     'formskit',
 
     'waitress',
-    'SQLAlchemy',
     'hamlish_jinja',
     'formskit',
+
+    'SQLAlchemy',
     'alembic',
+    'psycopg2',
 
     'fanstatic',
     'js.jquery',
