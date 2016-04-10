@@ -10,6 +10,9 @@ class FormskitPlug(RequestPlug):
         super().create_plugs()
         self.utils = self.add_plug(ControllerUtils)
 
+    def add_raw_form(self, formcls, *args, **kwargs):
+        return formcls(self, *args, **kwargs)
+
     def add_form(
         self,
         formcls,
@@ -18,7 +21,7 @@ class FormskitPlug(RequestPlug):
         *args,
         **kwargs
     ):
-        form = formcls(self, *args, **kwargs)
+        form = self.add_raw_form(formcls, *args, **kwargs)
         widget = widgetcls(form)
         self.utils.add_widget(name, widget)
         return form

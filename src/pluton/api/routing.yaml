@@ -1,0 +1,6 @@
+pluton.api.controllers:
+  -
+    controller: AddEvent
+    route: api:events:add
+    url: /api/event/add
+

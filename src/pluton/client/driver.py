@@ -8,3 +8,13 @@ class ClientDriver(ModelDriver):
 
     def list(self):
         return self.find_all()
+
+    def get_by_api(self, key, secret):
+        return (
+            self.find_all()
+            .filter(
+                Client.api_key == key,
+                Client.api_secret == secret,
+            )
+            .first()
+        )

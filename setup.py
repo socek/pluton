@@ -21,6 +21,7 @@ install_requires = [
 
     'fanstatic',
     'js.jquery',
+    'requests',
 ]
 
 

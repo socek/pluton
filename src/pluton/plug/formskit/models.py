@@ -6,20 +6,23 @@ from pluton.plug.plug import RequestPlug
 
 
 class PostForm(Form, RequestPlug):
+    with_csrf = True
 
     def __init__(self, parent):
         self.feed_parent(parent)
         super().__init__()
 
-        self.add_form_validator(CsrfMustMatch())
+        if self.with_csrf:
+            self.add_form_validator(CsrfMustMatch())
 
     def reset(self):
         super().reset()
         self.init_csrf()
 
     def init_csrf(self):
-        self.add_field('csrf_token')
-        self.set_value('csrf_token', self.request.session.get_csrf_token())
+        if self.with_csrf:
+            self.add_field('csrf_token')
+            self.set_value('csrf_token', self.request.session.get_csrf_token())
 
     def validate(self):
         return super().validate(self.POST.dict_of_lists())
