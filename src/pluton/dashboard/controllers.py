@@ -6,3 +6,7 @@ class Dashboard(Controller):
 
     def make(self):
         self.context['clients'] = self.clients.list()
+        self.context['get_events'] = self._get_events
+
+    def _get_events(self, client):
+        return self.events.list_latest(client.id)

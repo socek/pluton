@@ -35,3 +35,4 @@ class AddEventForm(Form):
             data['data'],
             data['state'],
         )
+        self.database().commit()

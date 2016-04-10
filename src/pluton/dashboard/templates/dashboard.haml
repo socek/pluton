@@ -8,3 +8,22 @@
         %div.jumbotron.jumbotron2
           %h2
             =client.name
+          %table.table.table-striped.table-bordered.table-hover.table-condensed
+            %thead
+              %th
+                Name
+              %th
+                Data
+              %th
+                When
+            %tbody
+              -for event in get_events(client):
+                %tr class="active {{event.state}}"
+                  %td
+                    {{event.name}}
+                  %td
+                    {{event.data}}
+                  %td
+                    {{event.when_created}}
+
+
