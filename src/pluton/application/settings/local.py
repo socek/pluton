@@ -13,4 +13,3 @@ def database(settings, paths):
     settings['db']['host'] = 'localhost'
     settings['db']['name'] = 'pluton'
     settings['db']['port'] = '5432'
-    print(settings['db']['url'])

@@ -4,7 +4,7 @@ from pluton.plug.controller import JsonController as BaseJsonController
 from pluton.plug.formskit.plug import FormskitPlug
 from pluton.plug.sqlalchemy.plug import DatabasePlug
 
-from pluton.dashboard.driver import ClientDriver
+from pluton.client.driver import ClientDriver
 
 from .resources import PlutonFanstaticPlug
 
