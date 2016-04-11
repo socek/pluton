@@ -18,6 +18,7 @@ class BaseWidget(Widget):
 class SingleWidget(BaseWidget):
 
     def __call__(self, *args, **kwargs):
+        self._create_context()
         self.make(*args, **kwargs)
         return self.render(self.renderer)
 

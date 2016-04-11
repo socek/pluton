@@ -1,0 +1,20 @@
+%div
+  %h2
+    =client_name
+  %table.table.table-striped.table-bordered.table-hover.table-condensed
+    %thead
+      %th
+        Name
+      %th
+        Data
+      %th
+        When
+    %tbody
+      -for event in events:
+        %tr class="active {{event.state}}"
+          %td
+            {{event.name}}
+          %td
+            {{event.data}}
+          %td
+            {{event.when_created}}

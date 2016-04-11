@@ -1,29 +1,7 @@
 -extends "pluton.application:templates/main.haml"
 -block content
   %div.col-lg-12
-    %div.bs-component
-      %h1
-        Clients
-      -for client in clients:
-        %div.jumbotron.jumbotron2
-          %h2
-            =client.name
-          %table.table.table-striped.table-bordered.table-hover.table-condensed
-            %thead
-              %th
-                Name
-              %th
-                Data
-              %th
-                When
-            %tbody
-              -for event in get_events(client):
-                %tr class="active {{event.state}}"
-                  %td
-                    {{event.name}}
-                  %td
-                    {{event.data}}
-                  %td
-                    {{event.when_created}}
-
-
+    %h1.text-center
+      Servers
+    -for client in clients:
+      =client()
