@@ -10,13 +10,13 @@ class EventDriver(ModelDriver):
         self,
         client_id,
         name,
-        data,
+        raw,
         state,
     ):
         return super().create(
             client_id=client_id,
             name=name,
-            data=data,
+            raw=raw,
             state=state,
         )
 

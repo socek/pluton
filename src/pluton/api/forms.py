@@ -22,7 +22,7 @@ class AddEventForm(Form):
         self.add_field('api_key', validators=[NotEmpty()])
         self.add_field('api_secret', validators=[NotEmpty()])
         self.add_field('name', validators=[NotEmpty()])
-        self.add_field('data', validators=[NotEmpty()])
+        self.add_field('raw', validators=[NotEmpty()])
         self.add_field('state', validators=[NotEmpty()])
 
         self.add_form_validator(ClientExistsValidator())
@@ -32,7 +32,7 @@ class AddEventForm(Form):
         self.events.create(
             self.client.id,
             data['name'],
-            data['data'],
+            data['raw'],
             data['state'],
         )
         self.database().commit()

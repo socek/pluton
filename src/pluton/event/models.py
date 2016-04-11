@@ -15,7 +15,7 @@ class Event(Model):
 
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
-    data = Column(String)
+    raw = Column(String)
     state = Column(String, nullable=False, default='normal')
 
     when_created = Column(DateTime, default=datetime.utcnow)

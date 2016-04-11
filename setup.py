@@ -42,5 +42,8 @@ if __name__ == '__main__':
             'paste.app_factory': (
                 'main = pluton.application.app:main',
             ),
+            'console_scripts': (
+                'pclient = pluton.apiclient.cmd:run',
+            ),
         }
     )
