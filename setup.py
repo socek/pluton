@@ -22,6 +22,8 @@ install_requires = [
     'fanstatic',
     'js.jquery',
     'requests',
+
+    'bael.project',
 ]
 
 
@@ -44,6 +46,7 @@ if __name__ == '__main__':
             ),
             'console_scripts': (
                 'pclient = pluton.apiclient.cmd:run',
+                'pcmd = pluton.cmd:run'
             ),
         }
     )
