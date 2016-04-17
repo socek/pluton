@@ -10,12 +10,12 @@ class PlutonCommand(Application):
 
     tasks = {
         'develop': 'pluton.cmd.develop:PlutonDevelop',
-        'serve': 'impex.console.serve:Serve',
-        'alembic-upgrade': 'impex.console.alembic:AlembicUpgrade',
-        'alembic-revision': 'impex.console.alembic:AlembicRevision',
-        'uwsgi_start': 'impex.console.uwsgi:StartUwsgi',
-        'uwsgi_stop': 'impex.console.uwsgi:StopUwsgi',
-        'uwsgi_restart': 'impex.console.uwsgi:RestartUwsgi',
+        'serve': 'pluton.cmd.develop:Serve',
+        'alembic-upgrade': 'pluton.cmd.alembic:AlembicUpgrade',
+        'alembic-revision': 'pluton.cmd.alembic:AlembicRevision',
+        'uwsgi_start': 'pluton.cmd.uwsgi:StartUwsgi',
+        'uwsgi_stop': 'pluton.cmd.uwsgi:StopUwsgi',
+        'uwsgi_restart': 'pluton.cmd.uwsgi:RestartUwsgi',
     }
 
     def create_parser(self):

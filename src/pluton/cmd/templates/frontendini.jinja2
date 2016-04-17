@@ -1,0 +1,34 @@
+[app:main]
+    use = egg:{{settings['package_name']}}
+
+[server:main]
+    use = egg:waitress#main
+    host = 0.0.0.0
+    port = 6543
+
+{% for key, data in settings['loggers'].items() %}
+[{{key}}]
+    {% for name, value in data.items() -%}
+        {{name}} = {{value}}
+    {% endfor -%}
+{% endfor %}
+[alembic]
+    {% for name, value in alembic.items() -%}
+        {{name}} = {{value}}
+    {% endfor %}
+[pshell]
+    setup = pluton.application.shell.setup
+
+[uwsgi]
+    socket = {{paths['uwsgi:socket']}}
+    master = true
+
+    need-app = true
+    processes = 4
+    chmod-socket = 777
+
+    pythonpath = *.egg
+    pidfile = {{paths['uwsgi:pidfile']}}
+    logto = {{paths['uwsgi:logto']}}
+    daemonize2 = {{paths['uwsgi:daemonize2']}}
+

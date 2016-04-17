@@ -3,6 +3,7 @@ def make_settings(settings, paths):
     session(settings, paths)
     database(settings, paths)
     fanstatic(settings, paths)
+    logger(settings, paths)
     debug(settings, paths)
 
 
@@ -61,4 +62,49 @@ def fanstatic(settings, paths):
     settings['fanstatic'] = {
         'bottom': True,
         'debug': True,
+    }
+
+
+def logger(settings, paths):
+    settings['loggers'] = {
+        'loggers': {
+            'keys': 'root, sqlalchemy, alembic',
+        },
+        'handlers': {
+            'keys': 'console, all',
+        },
+        'formatters': {
+            'keys': 'generic',
+        },
+        'logger_root': {
+            'level': 'INFO',
+            'handlers': 'console, all',
+        },
+        'logger_sqlalchemy': {
+            'level': 'INFO',
+            'handlers': 'all',
+            'qualname': 'sqlalchemy.engine',
+            'propagate': '0',
+        },
+        'logger_alembic': {
+            'level': 'INFO',
+            'handlers': 'all',
+            'qualname': 'alembic',
+            'propagate': '0',
+        },
+        'handler_console': {
+            'class': 'StreamHandler',
+            'args': '(sys.stderr,)',
+            'level': 'NOTSET',
+            'formatter': 'generic',
+        },
+        'handler_all': {
+            'class': 'FileHandler',
+            'args': "('%%(log_all)s', 'a')",
+            'level': 'NOTSET',
+            'formatter': 'generic',
+        },
+        'formatter_generic': {
+            'format': '%%(asctime)s %%(levelname)-5.5s [%%(name)s][%%(threadName)s] %%(message)s',
+        },
     }
