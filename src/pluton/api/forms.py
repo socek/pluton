@@ -1,3 +1,5 @@
+from json import loads
+
 from formskit.formvalidators import FormValidator
 from formskit.validators import NotEmpty
 
@@ -32,7 +34,7 @@ class AddEventForm(Form):
         self.events.create(
             self.client.id,
             data['name'],
-            data['raw'],
+            loads(data['raw']),
             data['state'],
         )
         self.database().commit()

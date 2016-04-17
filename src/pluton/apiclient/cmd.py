@@ -19,7 +19,11 @@ class Command(object):
 
         if self.args.name:
             method = getattr(self.client(), self.args.name)
-            method('Ermo', 'normal', 'This is text.')
+            method(
+                'Ermo',
+                'normal',
+                '{"txt": "This is text", "msg": "This is message"}',
+            )
         else:
             self.parser.print_help()
 

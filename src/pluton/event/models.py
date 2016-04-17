@@ -6,6 +6,7 @@ from sqlalchemy import ForeignKey
 from sqlalchemy import Integer
 from sqlalchemy import String
 from sqlalchemy.orm import relationship
+from sqlalchemy.dialects.postgresql import JSON
 
 from pluton.plug.sqlalchemy.model import Model
 
@@ -15,7 +16,7 @@ class Event(Model):
 
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
-    raw = Column(String)
+    raw = Column(JSON)
     state = Column(String, nullable=False, default='normal')
 
     when_created = Column(DateTime, default=datetime.utcnow)
