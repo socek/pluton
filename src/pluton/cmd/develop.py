@@ -21,7 +21,7 @@ class PlutonDevelop(PlutonSettingsMixin, Develop):
     pass
 
 
-class Serve(PlutonSettingsMixin, BaseVirtualenv):
+class Serve(BaseVirtualenv):
 
     def phase_settings(self):
         super().phase_settings()
@@ -35,6 +35,25 @@ class Serve(PlutonSettingsMixin, BaseVirtualenv):
         try:
             self.popen(
                 ['%(exe:pserve)s %(frontendini)s --reload' % self.paths],
+            )
+        except CommandAborted:
+            self.logger.info('Aborted')
+
+
+class Shell(BaseVirtualenv):
+
+    def phase_settings(self):
+        super().phase_settings()
+        self.paths.set_path('exe:pshell', 'virtualenv:bin', 'pshell')
+
+    def create_dependecies(self):
+        self.add_dependency(RunBefore(AlembicUpgrade()))
+        self.add_dependency(AlwaysRebuild())
+
+    def build(self):
+        try:
+            self.popen(
+                ['%(exe:pshell)s %(frontendini)s' % self.paths],
             )
         except CommandAborted:
             self.logger.info('Aborted')

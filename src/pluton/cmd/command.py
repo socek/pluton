@@ -11,6 +11,7 @@ class PlutonCommand(Application):
     tasks = {
         'develop': 'pluton.cmd.develop:PlutonDevelop',
         'serve': 'pluton.cmd.develop:Serve',
+        'shell': 'pluton.cmd.develop:Shell',
         'alembic-upgrade': 'pluton.cmd.alembic:AlembicUpgrade',
         'alembic-revision': 'pluton.cmd.alembic:AlembicRevision',
         'uwsgi_start': 'pluton.cmd.uwsgi:StartUwsgi',
@@ -45,6 +46,14 @@ class PlutonCommand(Application):
             help='Start development server.',
             action='store_const',
             const='serve',
+        )
+        group.add_argument(
+            '-t',
+            '--shell',
+            dest='task',
+            help='Start development shell.',
+            action='store_const',
+            const='shell',
         )
         group.add_argument(
             '-u',
