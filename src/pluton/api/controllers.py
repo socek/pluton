@@ -9,3 +9,4 @@ class AddEvent(JsonController):
         form = AddEventForm(self.forms)
         form.validate()
         self.context['form'] = form.get_report()
+        self.database().commit()

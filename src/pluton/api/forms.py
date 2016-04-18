@@ -31,10 +31,12 @@ class AddEventForm(Form):
 
     def on_success(self):
         data = self.get_data_dict(True)
-        self.events.create(
+        event = self.events.create(
             self.client.id,
             data['name'],
             loads(data['raw']),
             data['state'],
         )
-        self.database().commit()
+        self.database().add(event)
+        self.database().flush()
+        self.reactions.react_for_event(event)

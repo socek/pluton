@@ -23,7 +23,7 @@ install_requires = [
     'js.jquery',
     'requests',
 
-    'bael.project==0.2.1',
+    'bael.project==0.2.2',
     'uwsgi',
 ]
 

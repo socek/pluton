@@ -5,6 +5,10 @@ from pluton.plug.plug import Plug
 
 class DatabasePlug(Plug):
 
+    def feed_parent(self, parent):
+        super().feed_parent(parent)
+        self().expire_all()
+
     def __call__(self):
         if self.settings['db']['type'] == 'sqlite':
             return self._get_sqlite_database()
@@ -18,6 +22,4 @@ class DatabasePlug(Plug):
         return self.db
 
     def _get_normal_database(self):
-        db = self.registry['db']
-        db.expire_all()
-        return db
+        return self.registry['db']
