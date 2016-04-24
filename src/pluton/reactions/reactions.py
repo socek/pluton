@@ -1,19 +1,20 @@
-class Reaction(object):
-    name = None
+from pluton.application.plugs import PluggedMixin
+from pluton.plug.plug import Plug
 
-    def __init__(self, event):
-        self.event = event
+
+class Reaction(PluggedMixin, Plug):
+    name = None
 
     @property
     def raw(self):
         return self.event.raw
 
-    def react(self):
+    def react(self, event):
         pass
 
 
 class PrintEvent(Reaction):
     name = 'print_event'
 
-    def react(self):
-        print('React:', self.event.name, self.event.raw)
+    def react(self, event):
+        print('React:', event.name, event.raw)

@@ -19,10 +19,11 @@ class ReactionRunner(Plug):
         self.add_reaction_cls(PrintEvent)
 
     def add_reaction_cls(self, cls):
-        self.reactions[cls.name] = cls
+        reaction = self.add_plug(cls)
+        self.reactions[reaction.name] = reaction
 
     def react_for_event(self, event):
         query = self.reaction_links.list_for_event(event.client.id, event.name)
         for reaction_name in query:
             react = self.reactions[reaction_name]
-            react(event).react()
+            react.react(event)

@@ -18,6 +18,7 @@ class Event(Model):
     name = Column(String, nullable=False)
     raw = Column(JSON)
     state = Column(String, nullable=False, default='normal')
+    reaction_data = Column(JSON)
 
     when_created = Column(DateTime, default=datetime.utcnow)
 
