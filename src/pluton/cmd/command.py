@@ -3,10 +3,14 @@ from baelfire.application.application import Application
 from baelfire.application.commands.graph.graph import Graph
 from logging import getLogger
 
+from .core import PlutonCore
+
 log = getLogger(__name__)
 
 
 class PlutonCommand(Application):
+
+    core_cls = PlutonCore
 
     tasks = {
         'develop': 'pluton.cmd.develop:PlutonDevelop',
@@ -122,4 +126,4 @@ class PlutonCommand(Application):
 
     def _get_task(self, args):
         url = self.tasks[args.task]
-        return self.import_task(url)()
+        return self.import_task(url)(self.core_cls())

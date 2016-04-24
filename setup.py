@@ -21,9 +21,11 @@ install_requires = [
 
     'fanstatic',
     'js.jquery',
+    'js.bootstrap',
     'requests',
 
-    'bael.project==0.2.2',
+    'bael.project==0.2.3',
+    'baelfire==0.3.2',
     'uwsgi',
 ]
 
