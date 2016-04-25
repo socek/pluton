@@ -3,6 +3,7 @@ from pluton.plug.sqlalchemy.plug import DatabasePlug
 
 from .driver import ReactionLinkDriver
 from .reactions import PrintEvent
+from .reactions import DiskCheckReaction
 
 
 class ReactionRunner(Plug):
@@ -17,6 +18,7 @@ class ReactionRunner(Plug):
         self.database = self.add_plug(DatabasePlug)
 
         self.add_reaction_cls(PrintEvent)
+        self.add_reaction_cls(DiskCheckReaction)
 
     def add_reaction_cls(self, cls):
         reaction = self.add_plug(cls)

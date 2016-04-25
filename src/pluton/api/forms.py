@@ -1,5 +1,3 @@
-from json import loads
-
 from formskit.formvalidators import FormValidator
 from formskit.validators import NotEmpty
 
@@ -18,14 +16,15 @@ class ClientExistsValidator(FormValidator):
 
 class AddEventForm(Form):
     with_csrf = False
+    always_submitting = True
 
     def create_form(self):
         self.clients
         self.add_field('api_key', validators=[NotEmpty()])
         self.add_field('api_secret', validators=[NotEmpty()])
         self.add_field('name', validators=[NotEmpty()])
-        self.add_field('raw', validators=[NotEmpty()])
         self.add_field('state', validators=[NotEmpty()])
+        self.add_field('arg')
 
         self.add_form_validator(ClientExistsValidator())
 
@@ -34,9 +33,21 @@ class AddEventForm(Form):
         event = self.events.create(
             self.client.id,
             data['name'],
-            loads(data['raw']),
+            self.raw,
             data['state'],
+            data['arg'],
         )
         self.database().add(event)
         self.database().flush()
         self.reactions.react_for_event(event)
+
+    def _get_form_data(self):
+        self.raw = {}
+        data = {}
+        for key, values in self.POST.dict_of_lists().items():
+            if key.startswith('raw_'):
+                key = key[4:]
+                self.raw[key] = values[0]
+            else:
+                data[key] = values
+        return data

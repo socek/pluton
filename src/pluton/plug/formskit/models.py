@@ -7,6 +7,7 @@ from pluton.plug.plug import RequestPlug
 
 class PostForm(Form, RequestPlug):
     with_csrf = True
+    always_submitting = False
 
     def __init__(self, parent):
         self.feed_parent(parent)
@@ -25,7 +26,13 @@ class PostForm(Form, RequestPlug):
             self.set_value('csrf_token', self.request.session.get_csrf_token())
 
     def validate(self):
-        return super().validate(self.POST.dict_of_lists())
+        return super().validate(self._get_form_data())
+
+    def _get_form_data(self):
+        return self.POST.dict_of_lists()
+
+    def _is_form_submitted(self, raw_data):
+        return self.always_submitting or super()._is_form_submitted(raw_data)
 
 
 class CsrfMustMatch(FormValidator):

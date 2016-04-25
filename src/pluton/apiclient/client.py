@@ -1,5 +1,7 @@
 from requests import post
 
+from .checks.disk import disk_space_check
+
 
 class ApiClient(object):
     main_url = 'http://127.0.0.1:6543/api'
@@ -21,12 +23,19 @@ class ApiClient(object):
             data,
         )
 
-    def add_event(self, name, state, raw, **kwargs):
+    def add_event(self, name, state, raw, arg=None, **kwargs):
         data = {
             'form_name': 'AddEventForm',
             'name': name,
             'state': state,
-            'raw': raw,
+            'arg': arg,
         }
+        for key, value in raw.items():
+            data['raw_' + key] = value
         data.update(kwargs)
         return self._call('event:add', data)
+
+    def send_disk_chack(self, disk):
+        raw = disk_space_check(disk)
+        name = 'Disk check'
+        self.add_event(name, 'normal', raw, arg=disk)

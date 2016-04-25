@@ -14,6 +14,13 @@ class Command(object):
             help='Name of the call',
         )
 
+        self.parser.add_argument(
+            '-d',
+            '--disk',
+            dest='disk',
+            help='Send disk data',
+        )
+
     def run(self):
         self.args = self.parser.parse_args()
 
@@ -24,6 +31,8 @@ class Command(object):
                 'normal',
                 '{"txt": "This is text", "msg": "This is message"}',
             )
+        elif self.args.disk:
+            self.client().send_disk_chack(self.args.disk)
         else:
             self.parser.print_help()
 

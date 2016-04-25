@@ -6,6 +6,8 @@
       %th
         Name
       %th
+        Arg
+      %th
         Data
       %th
         When
@@ -15,6 +17,8 @@
           %td
             {{event.name}}
           %td
-            {{event.raw}}
+            {{event.arg}}
+          %td
+            {{event.description|safe}}
           %td
             {{event.when_created}}

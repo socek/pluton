@@ -65,6 +65,10 @@ class RequestPlug(Plug):
         return self.request.GET
 
     @property
+    def json(self):
+        return self.request.json
+
+    @property
     def matchdict(self):
         return self.request.matchdict
 

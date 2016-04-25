@@ -18,3 +18,14 @@ class PrintEvent(Reaction):
 
     def react(self, event):
         print('React:', event.name, event.raw)
+
+
+class DiskCheckReaction(Reaction):
+    name = 'disk_check'
+
+    def react(self, event):
+        data = ''
+        for key, value in sorted(event.raw.items()):
+            data += '%s: %s<br>\n' % (key, value)
+        event.description = data
+        self.database().flush()
