@@ -11,6 +11,8 @@
         Data
       %th
         When
+      %th
+        Actions
     %tbody
       -for event in events:
         %tr class="active {{event.state}}"
@@ -22,3 +24,6 @@
             {{event.description|safe}}
           %td
             {{event.when_created}}
+          %td
+            %a href="{{route_path('events:hide', event_id=event.id)}}" class="btn btn-danger btn-xs"
+              Hide

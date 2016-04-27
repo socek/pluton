@@ -1,0 +1,6 @@
+pluton.event.controllers:
+  -
+    controller: HideEvent
+    route: events:hide
+    url: /event/{event_id:\d+}/hide
+

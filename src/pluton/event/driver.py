@@ -23,7 +23,7 @@ class EventDriver(ModelDriver):
         )
 
     def list_latest(self, client_id):
-        return (
+        query = (
             self.find_all()
             .distinct(self.model.name, self.model.arg)
             .filter(
@@ -35,3 +35,6 @@ class EventDriver(ModelDriver):
                 self.model.when_created.desc(),
             )
         )
+        for obj in query:
+            if not obj.is_hidden:
+                yield obj

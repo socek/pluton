@@ -19,7 +19,6 @@ class AddEventForm(Form):
     always_submitting = True
 
     def create_form(self):
-        self.clients
         self.add_field('api_key', validators=[NotEmpty()])
         self.add_field('api_secret', validators=[NotEmpty()])
         self.add_field('name', validators=[NotEmpty()])

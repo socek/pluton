@@ -4,7 +4,7 @@ from sqlalchemy import Column
 from sqlalchemy import DateTime
 from sqlalchemy import ForeignKey
 from sqlalchemy import Integer
-from sqlalchemy import String
+from sqlalchemy import String, Boolean
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import JSON
 
@@ -21,6 +21,7 @@ class Event(Model):
     state = Column(String, nullable=False, default='normal')
     reaction_data = Column(JSON)
     description = Column(String)
+    is_hidden = Column(Boolean, default=False)
 
     when_created = Column(DateTime, default=datetime.utcnow)
 
