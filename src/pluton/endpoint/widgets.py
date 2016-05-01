@@ -25,6 +25,7 @@ class EndpointRowWidget(SingleWidget):
 
     def make(self):
         self.context['endpoint'] = self.endpoint
+        self.context['status'] = self.events.get_status(self.endpoint.id)
 
 
 class CreateEndpointFormWidget(FormWidget):

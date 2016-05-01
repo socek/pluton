@@ -1,3 +1,4 @@
+from collections import defaultdict
 from pluton.plug.sqlalchemy.driver import ModelDriver
 
 from .models import Event
@@ -38,3 +39,14 @@ class EventDriver(ModelDriver):
         for obj in query:
             if not obj.is_hidden:
                 yield obj
+
+    def get_status(self, endpoint_id):
+        """
+        This method returns number of events in each status,
+        example: {'normal': 2, 'critical': 1}
+        """
+        status = defaultdict(lambda: 0)
+        status['normal'] = 0
+        for event in self.list_latest(endpoint_id):
+            status[event.state] += 1
+        return status

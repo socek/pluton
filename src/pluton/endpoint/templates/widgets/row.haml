@@ -3,6 +3,8 @@
     %a href="{{route_path('endpoints:show', endpoint_id=endpoint.id)}}"
       =endpoint.name
   %td
-    Status
+    -for key, value in status.items():
+      %div
+        {{key}}: {{value}}
   %td
     %a.glyphicon.glyphicon-list href="{{route_path('endpoints:show', endpoint_id=endpoint.id)}}" aria-hidden="true" title="Show"
