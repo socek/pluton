@@ -1,5 +1,5 @@
 from pluton.application.controller import Controller
-from pluton.endpoint.widgets import EndpointSummaryWidget
+from pluton.endpoint.widgets import EndpointRowWidget
 
 
 class Dashboard(Controller):
@@ -10,6 +10,6 @@ class Dashboard(Controller):
 
     def get_endpoints(self):
         for endpoint in self.endpoints.list():
-            obj = EndpointSummaryWidget(endpoint)
+            obj = EndpointRowWidget(endpoint)
             obj.feed_parent(self)
             yield obj

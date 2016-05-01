@@ -3,7 +3,7 @@ from fanstatic import Resource
 
 from pluton.plug.fanstatic.plug import FanstaticPlug
 
-library = Library('impex', 'static')
+library = Library('pluton', 'static')
 
 bootstrap_js = Resource(
     library,

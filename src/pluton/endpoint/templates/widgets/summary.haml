@@ -1,6 +1,19 @@
 %div
   %h2
     =endpoint_name
+  %table.table.table-condensed
+    %tbody
+      %tr
+        %td
+          Api Key
+        %td
+          %input type="text" value="{{api_key}}"
+      %tr
+        %td
+          Api Secret
+        %td
+          %input type="text" value="{{api_secret}}"
+
   %table.table.table-striped.table-bordered.table-hover.table-condensed
     %thead
       %th

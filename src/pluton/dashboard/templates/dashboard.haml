@@ -3,7 +3,17 @@
   %div.col-lg-12
     %h1.text-center
       Endpoints&nbsp;
-      %a.glyphicon.glyphicon-plus href="{{route_path('endpoints:create')}}" aria-hidden="true"
+      %a.glyphicon.glyphicon-plus-sign href="{{route_path('endpoints:create')}}" aria-hidden="true" title="Create"
 
-    -for endpoint in endpoints:
-      =endpoint()
+    %table.table.table-striped.table-bordered.table-hover.table-condensed
+      %thead
+        %th
+          Name
+        %th
+          Status
+        %th
+          Actions
+      %tbody
+        -for endpoint in endpoints:
+          =endpoint()
+

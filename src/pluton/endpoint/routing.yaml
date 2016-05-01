@@ -2,5 +2,9 @@ pluton.endpoint.controllers:
   -
     controller: CreateEndpoint
     route: endpoints:create
-    url: /endpoint/create
+    url: /endpoint/create/
+  -
+    controller: ShowEndpoint
+    route: endpoints:show
+    url: /endpoint/{endpoint_id:\d+}/
 
