@@ -2,6 +2,8 @@
 -block content
   %div.col-lg-12
     %h1.text-center
-      Endpoints
+      Endpoints&nbsp;
+      %a.glyphicon.glyphicon-plus href="{{route_path('endpoints:create')}}" aria-hidden="true"
+
     -for endpoint in endpoints:
       =endpoint()

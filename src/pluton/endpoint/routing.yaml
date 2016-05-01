@@ -1,0 +1,6 @@
+pluton.endpoint.controllers:
+  -
+    controller: CreateEndpoint
+    route: endpoints:create
+    url: /endpoint/create
+

@@ -6,6 +6,14 @@ from .models import Endpoint
 class EndpointDriver(ModelDriver):
     model = Endpoint
 
+    def create(
+        self,
+        name
+    ):
+        return super().create(
+            name=name,
+        )
+
     def list(self):
         return self.find_all()
 
