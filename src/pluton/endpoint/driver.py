@@ -1,10 +1,10 @@
 from pluton.plug.sqlalchemy.driver import ModelDriver
 
-from .models import Client
+from .models import Endpoint
 
 
-class ClientDriver(ModelDriver):
-    model = Client
+class EndpointDriver(ModelDriver):
+    model = Endpoint
 
     def list(self):
         return self.find_all()
@@ -13,8 +13,8 @@ class ClientDriver(ModelDriver):
         return (
             self.find_all()
             .filter(
-                Client.api_key == key,
-                Client.api_secret == secret,
+                Endpoint.api_key == key,
+                Endpoint.api_secret == secret,
             )
             .first()
         )

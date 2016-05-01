@@ -1,7 +1,7 @@
 from pluton.plug.formskit.plug import FormskitPlug
 from pluton.plug.sqlalchemy.plug import DatabasePlug
 
-from pluton.client.driver import ClientDriver
+from pluton.endpoint.driver import EndpointDriver
 from pluton.event.driver import EventDriver
 from pluton.reactions.driver import ReactionLinkDriver
 
@@ -12,7 +12,7 @@ class PluggedMixin(object):
 
     def create_plugs(self):
         super().create_plugs()
-        self.clients = self.add_plug(ClientDriver)
+        self.endpoints = self.add_plug(EndpointDriver)
         self.events = self.add_plug(EventDriver)
         self.reaction_links = self.add_plug(ReactionLinkDriver)
         self.forms = self.add_plug(FormskitPlug)

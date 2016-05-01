@@ -8,26 +8,26 @@ class EventDriver(ModelDriver):
 
     def create(
         self,
-        client_id,
+        endpoint_id,
         name,
         raw,
         state,
         arg=None,
     ):
         return super().create(
-            client_id=client_id,
+            endpoint_id=endpoint_id,
             name=name,
             raw=raw,
             state=state,
             arg=arg,
         )
 
-    def list_latest(self, client_id):
+    def list_latest(self, endpoint_id):
         query = (
             self.find_all()
             .distinct(self.model.name, self.model.arg)
             .filter(
-                self.model.client_id == client_id,
+                self.model.endpoint_id == endpoint_id,
             )
             .order_by(
                 self.model.name,

@@ -25,5 +25,5 @@ class Event(Model):
 
     when_created = Column(DateTime, default=datetime.utcnow)
 
-    client_id = Column(Integer, ForeignKey('clients.id'), nullable=False)
-    client = relationship('Client')
+    endpoint_id = Column(Integer, ForeignKey('endpoints.id'), nullable=False)
+    endpoint = relationship('Endpoint')

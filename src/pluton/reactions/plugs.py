@@ -25,7 +25,7 @@ class ReactionRunner(Plug):
         self.reactions[reaction.name] = reaction
 
     def react_for_event(self, event):
-        query = self.reaction_links.list_for_event(event.client.id, event.name)
+        query = self.reaction_links.list_for_event(event.endpoint.id, event.name)
         for reaction_name in query:
             react = self.reactions[reaction_name]
             react.react(event)

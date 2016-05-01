@@ -15,5 +15,5 @@ class ReactionLink(Model):
     reaction_name = Column(String, nullable=False)
     event_name = Column(String, nullable=False)
 
-    client_id = Column(Integer, ForeignKey('clients.id'), nullable=False)
-    client = relationship('Client')
+    endpoint_id = Column(Integer, ForeignKey('endpoints.id'), nullable=False)
+    endpoint = relationship('Endpoint')

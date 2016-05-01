@@ -4,14 +4,14 @@ from formskit.validators import NotEmpty
 from pluton.application.forms import Form
 
 
-class ClientExistsValidator(FormValidator):
+class EndpointExistsValidator(FormValidator):
     message = 'Authentication failed'
 
     def validate(self):
         api_key = self.form.get_value('api_key')
         api_secret = self.form.get_value('api_secret')
-        self.form.client = self.form.clients.get_by_api(api_key, api_secret)
-        return self.form.client
+        self.form.endpoint = self.form.endpoints.get_by_api(api_key, api_secret)
+        return self.form.endpoint
 
 
 class AddEventForm(Form):
@@ -25,12 +25,12 @@ class AddEventForm(Form):
         self.add_field('state', validators=[NotEmpty()])
         self.add_field('arg')
 
-        self.add_form_validator(ClientExistsValidator())
+        self.add_form_validator(EndpointExistsValidator())
 
     def on_success(self):
         data = self.get_data_dict(True)
         event = self.events.create(
-            self.client.id,
+            self.endpoint.id,
             data['name'],
             self.raw,
             data['state'],
