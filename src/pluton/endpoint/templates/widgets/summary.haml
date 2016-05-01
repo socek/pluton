@@ -38,5 +38,5 @@
           %td
             {{event.when_created}}
           %td
-            %a href="{{route_path('events:hide', event_id=event.id)}}" class="btn btn-danger btn-xs"
-              Hide
+            %a.glyphicon.glyphicon-stop href="{{route_path('events:hide', event_id=event.id)}}" class="btn btn-danger btn-xs" title="Hide"
+            %a.glyphicon.glyphicon-play href="{{route_path('events:hide', event_id=event.id)}}" class="btn btn-danger btn-xs" title="Edit Event"
