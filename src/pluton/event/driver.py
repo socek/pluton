@@ -2,12 +2,14 @@ from collections import defaultdict
 from pluton.plug.sqlalchemy.driver import ModelDriver
 
 from .models import Event
+from .models import EventGroup
 
 
 class EventDriver(ModelDriver):
-    model = Event
+    model = EventGroup
+    model_event = Event
 
-    def create(
+    def create_event(
         self,
         endpoint_id,
         name,
@@ -15,30 +17,47 @@ class EventDriver(ModelDriver):
         state,
         arg=None,
     ):
-        return super().create(
+        group = self.upsert(endpoint_id, name, arg)
+
+        event = Event()
+        event.raw = raw
+        event.group = group
+        self.database().add(event)
+        return event
+
+    def upsert(self, endpoint_id, name, arg):
+        return super().upsert(
             endpoint_id=endpoint_id,
             name=name,
-            raw=raw,
-            state=state,
             arg=arg,
         )
 
     def list_latest(self, endpoint_id):
-        query = (
-            self.find_all()
-            .distinct(self.model.name, self.model.arg)
+        return (
+            self.query(
+                self.model.id,
+                self.model.name,
+                self.model.arg,
+                self.model.state,
+                self.model.reaction_data,
+                self.model.description,
+                self.model_event.when_created,
+            )
+            .join(self.model_event)
             .filter(
                 self.model.endpoint_id == endpoint_id,
+                self.model.is_hidden.isnot(True)
             )
             .order_by(
                 self.model.name,
                 self.model.arg,
-                self.model.when_created.desc(),
+                self.model_event.when_created.desc(),
+            )
+            .distinct(
+                self.model.name,
+                self.model.arg,
             )
         )
-        for obj in query:
-            if not obj.is_hidden:
-                yield obj
 
     def get_status(self, endpoint_id):
         """

@@ -29,13 +29,14 @@ class AddEventForm(Form):
 
     def on_success(self):
         data = self.get_data_dict(True)
-        event = self.events.create(
+        event = self.events.create_event(
             self.endpoint.id,
             data['name'],
             self.raw,
             data['state'],
             data['arg'],
         )
+        event.group.is_hidden = False
         self.database().add(event)
         self.database().flush()
         self.reactions.react_for_event(event)

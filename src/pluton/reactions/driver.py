@@ -20,14 +20,14 @@ class ReactionLinkDriver(ModelDriver):
             priority=priority,
         )
 
-    def list_for_event(self, endpoint_id, event_name):
+    def list_for_event(self, event):
         query = (
             self.query(
                 self.model.reaction_name,
             )
             .filter(
-                self.model.endpoint_id == endpoint_id,
-                self.model.event_name == event_name,
+                self.model.endpoint_id == event.group.endpoint_id,
+                self.model.event_name == event.group.name,
             )
             .order_by(
                 self.model.priority.desc(),
