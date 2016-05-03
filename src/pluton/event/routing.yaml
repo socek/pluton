@@ -4,3 +4,15 @@ pluton.event.controllers:
     route: events:hide
     url: /event/{event_id:\d+}/hide
 
+  -
+    controller: ConfigureReactions
+    route: events:edit
+    url: /event/edit/{event_group_id:\d+}
+  -
+    controller: AddReaction
+    route: events:add_reaction
+    url: /event/edit/{event_group_id:\d+}/add_reaction
+  -
+    controller: RemoveReaction
+    route: events:remove_reaction
+    url: /reaction/{reaction_id:\d+}/remove

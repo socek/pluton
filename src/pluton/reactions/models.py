@@ -13,7 +13,6 @@ class ReactionLink(Model):
     id = Column(Integer, primary_key=True)
     priority = Column(Integer, nullable=False, default=0)
     reaction_name = Column(String, nullable=False)
-    event_name = Column(String, nullable=False)
 
-    endpoint_id = Column(Integer, ForeignKey('endpoints.id'), nullable=False)
-    endpoint = relationship('Endpoint')
+    event_group_id = Column(Integer, ForeignKey('event_groups.id'), nullable=False)
+    event_group = relationship('EventGroup')

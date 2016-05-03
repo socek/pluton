@@ -1,0 +1,21 @@
+-extends "pluton.application:templates/main.haml"
+-block content
+  %div.col-lg-12
+    %h1.text-center
+      Event Reactions&nbsp;
+      %a.glyphicon.glyphicon-plus-sign href="{{route_path('events:add_reaction', event_group_id=event_group.id)}}" aria-hidden="true" title="Create"
+
+    %table.table.table-striped.table-bordered.table-hover.table-condensed
+      %thead
+        %th
+          Name
+        %th
+          Actions
+      %tbody
+      -for reaction in reactions:
+        %tr
+          %th
+            =reaction.reaction_name
+          %th
+            %a.glyphicon.glyphicon-stop href="{{route_path('events:remove_reaction', reaction_id=reaction.id)}}" class="btn btn-danger btn-xs" title="Hide"
+

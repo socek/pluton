@@ -25,6 +25,8 @@
       %th
         When
       %th
+        Reactions
+      %th
         Actions
     %tbody
       -for event in events:
@@ -38,5 +40,7 @@
           %td
             {{event.when_created}}
           %td
+            {{get_reactions(event.id)}}
+          %td
             %a.glyphicon.glyphicon-stop href="{{route_path('events:hide', event_id=event.id)}}" class="btn btn-danger btn-xs" title="Hide"
-            %a.glyphicon.glyphicon-play href="{{route_path('events:hide', event_id=event.id)}}" class="btn btn-danger btn-xs" title="Edit Event"
+            %a.glyphicon.glyphicon-play href="{{route_path('events:edit', event_group_id=event.id)}}" class="btn btn-danger btn-xs" title="Edit Event"

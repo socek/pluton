@@ -8,31 +8,28 @@ class ReactionLinkDriver(ModelDriver):
 
     def create(
         self,
-        endpoint_id,
+        event_group_id,
         reaction_name,
-        event_name,
-        priority,
     ):
         return super().create(
-            endpoint_id=endpoint_id,
-            event_name=event_name,
             reaction_name=reaction_name,
-            priority=priority,
+            event_group_id=event_group_id,
         )
 
     def list_for_event(self, event):
-        query = (
+        for reaction in self.list_for_event_group(event.group_id):
+            yield reaction.reaction_name
+
+    def list_for_event_group(self, group_id):
+        return (
             self.query(
-                self.model.reaction_name,
+                self.model
             )
             .filter(
-                self.model.endpoint_id == event.group.endpoint_id,
-                self.model.event_name == event.group.name,
+                self.model.event_group_id == group_id
             )
             .order_by(
                 self.model.priority.desc(),
             )
 
         )
-        for reactiion in query:
-            yield reactiion.reaction_name

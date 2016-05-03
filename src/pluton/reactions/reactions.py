@@ -17,7 +17,7 @@ class PrintEvent(Reaction):
     name = 'print_event'
 
     def react(self, event):
-        print('React:', event.name, event.raw)
+        print('React:', event.group.name, event.raw)
 
 
 class DiskCheckReaction(Reaction):
@@ -27,5 +27,5 @@ class DiskCheckReaction(Reaction):
         data = ''
         for key, value in sorted(event.raw.items()):
             data += '%s: %s<br>\n' % (key, value)
-        event.description = data
+        event.group.description = data
         self.database().flush()

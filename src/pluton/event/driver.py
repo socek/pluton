@@ -1,5 +1,8 @@
 from collections import defaultdict
+from sqlalchemy import func
 from pluton.plug.sqlalchemy.driver import ModelDriver
+
+from pluton.reactions.models import ReactionLink
 
 from .models import Event
 from .models import EventGroup
@@ -69,3 +72,16 @@ class EventDriver(ModelDriver):
         for event in self.list_latest(endpoint_id):
             status[event.state] += 1
         return status
+
+    def get_reaction_count(self, group_id):
+        return (
+            self.query(
+                func.count(ReactionLink.id)
+            )
+            .join(self.model)
+            .group_by(self.model.id)
+            .filter(
+                ReactionLink.event_group_id == group_id
+            )
+            .scalar()
+        )
