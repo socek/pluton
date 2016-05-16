@@ -1,8 +1,11 @@
+import sys
+
 from bael.project.develop import Develop
 from bael.project.virtualenv import BaseVirtualenv
 from baelfire.dependencies import AlwaysRebuild
 from baelfire.dependencies import RunBefore
 from baelfire.error import CommandAborted
+from baelfire.error import CommandError
 
 from .alembic import AlembicUpgrade
 
@@ -57,3 +60,31 @@ class Shell(BaseVirtualenv):
             )
         except CommandAborted:
             self.logger.info('Aborted')
+
+
+class BasePyTest(BaseVirtualenv):
+
+    def create_dependecies(self):
+        self.add_dependency(RunBefore(AlembicUpgrade()))
+        self.add_dependency(AlwaysRebuild())
+
+    def pytest(self, command='', *args, **kwargs):
+        kwargs['shell'] = True
+        print(self.paths['package']['main'])
+        kwargs['cwd'] = self.paths['package']['main']
+        command = self.paths['exe:pytest'] + ' ' + command
+        print(command)
+        return self.popen([command], *args, **kwargs)
+
+
+class RunTests(BasePyTest):
+
+    def build(self):
+        cmd = " ".join(
+            '"%s"' % x.strip().replace('"', r'\"')
+            for x in sys.argv[1:]
+        )
+        try:
+            self.pytest(cmd)
+        except (CommandAborted, CommandError):
+            pass

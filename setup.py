@@ -27,6 +27,7 @@ install_requires = [
     'bael.project==0.2.3',
     'baelfire==0.3.2',
     'uwsgi',
+    'pytest',
 ]
 
 
@@ -49,7 +50,8 @@ if __name__ == '__main__':
             ),
             'console_scripts': (
                 'pclient = pluton.apiclient.cmd:run',
-                'pcmd = pluton.cmd:run'
+                'pcmd = pluton.cmd:run',
+                'ptest = pluton.cmd:runtest',
             ),
         }
     )

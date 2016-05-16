@@ -41,6 +41,8 @@ class PlutonCore(ProjectCore):
         self.paths.set_path('uwsgi:daemonize2', 'data', 'uwsgi.daemonize.log')
         self.paths.set_path('uwsgi:socket', 'data', 'uwsgi.socket')
 
+        self.paths.set_path('exe:pytest', 'virtualenv:bin', 'py.test')
+
     def after_dependencies(self):
         super().after_dependencies()
         self.settings['ignore_inits_dirs'] = self.settings.get(

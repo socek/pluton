@@ -1,6 +1,8 @@
 from argparse import ArgumentParser
 from baelfire.application.application import Application
 from baelfire.application.commands.graph.graph import Graph
+from logging import INFO
+from logging import basicConfig
 from logging import getLogger
 
 from .core import PlutonCore
@@ -127,3 +129,18 @@ class PlutonCommand(Application):
     def _get_task(self, args):
         url = self.tasks[args.task]
         return self.import_task(url)(self.core_cls())
+
+
+class PlutonSingleCommand(object):
+
+    core_cls = PlutonCore
+
+    def __init__(self, task):
+        self.task = task
+
+    def run(self):
+        format = ' * %(levelname)s %(name)s: %(message)s *'
+        basicConfig(level=INFO, format=format)
+        task = self.task(self.core_cls())
+        task.run()
+
