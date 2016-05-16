@@ -86,3 +86,16 @@ class RunTests(BasePyTest):
             self.pytest(cmd)
         except (CommandAborted, CommandError):
             pass
+
+
+class RunCoverage(BasePyTest):
+
+    def build(self):
+        cmd = " ".join(
+            '"%s"' % x.strip().replace('"', r'\"')
+            for x in sys.argv[1:]
+        )
+        try:
+            self.pytest('--cov pluton ' + cmd)
+        except (CommandAborted, CommandError):
+            pass

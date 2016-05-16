@@ -53,6 +53,7 @@ if __name__ == '__main__':
                 'pclient = pluton.apiclient.cmd:run',
                 'pcmd = pluton.cmd:run',
                 'ptest = pluton.cmd:runtest',
+                'pcoverage = pluton.cmd:runcoverage',
             ),
         }
     )
