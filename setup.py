@@ -28,6 +28,7 @@ install_requires = [
     'baelfire==0.3.2',
     'uwsgi',
     'pytest',
+    'pytest-cov',
 ]
 
 

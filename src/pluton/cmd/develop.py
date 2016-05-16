@@ -70,10 +70,8 @@ class BasePyTest(BaseVirtualenv):
 
     def pytest(self, command='', *args, **kwargs):
         kwargs['shell'] = True
-        print(self.paths['package']['main'])
         kwargs['cwd'] = self.paths['package']['main']
         command = self.paths['exe:pytest'] + ' ' + command
-        print(command)
         return self.popen([command], *args, **kwargs)
 
 
