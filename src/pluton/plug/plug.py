@@ -1,10 +1,9 @@
 from collections import OrderedDict
 
 
-class Plug(object):
+class BasePlug(object):
 
-    def __init__(self):
-        super().__init__()
+    def do_init(self):
         self.parent = None
         self._plugs = OrderedDict()
 
@@ -44,6 +43,13 @@ class Plug(object):
     @property
     def paths(self):
         return self.application.paths
+
+
+class Plug(BasePlug):
+
+    def __init__(self):
+        super().__init__()
+        self.do_init()
 
 
 class RequestPlug(Plug):

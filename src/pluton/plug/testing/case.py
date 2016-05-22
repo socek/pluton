@@ -4,11 +4,18 @@ from pytest import fixture
 
 from .cache import cache
 from .dict import MockedDict
+from pluton.plug.plug import BasePlug
 
 
-class TestCase(object):
+class BaseTestCase(BasePlug):
 
     _object_cls = None
+    _application = None
+
+    @cache('session')
+    def get_application(self):
+        self._application.run_tests()
+        return self._application
 
     @fixture(autouse=True)
     def pytest_setup(self, request):
@@ -16,6 +23,8 @@ class TestCase(object):
         request.addfinalizer(self.tearDown)
 
     def setUp(self):
+        self.do_init()
+        self.feed_parent(self.get_application())
         self._test_cache = {}
         self._patchers = []
 
@@ -42,8 +51,22 @@ class TestCase(object):
     def object(self, *args, **kwargs):
         return self._object_cls(*args, **kwargs)
 
+    def feed_parent(self, application):
+        self.application = application
+        self.parent = None
+        self.create_plugs()
 
-class RequestCase(TestCase):
+
+class BasePlugableCase(BaseTestCase):
+
+    @cache
+    def object(self, *args, **kwargs):
+        obj = self._object_cls(*args, **kwargs)
+        obj.feed_parent(self)
+        return obj
+
+
+class BaseRequestCase(BaseTestCase):
 
     @cache
     def mrequest(self):
@@ -85,7 +108,7 @@ class RequestCase(TestCase):
         return self.registry()['paths']
 
 
-class ControllerCase(RequestCase):
+class BaseControllerCase(BaseRequestCase):
 
     @cache
     def mroot_factory(self):

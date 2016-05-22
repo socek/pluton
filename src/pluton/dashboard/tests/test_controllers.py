@@ -1,8 +1,8 @@
 from mock import MagicMock
 
 from pluton.plug.testing.cache import cache
-from pluton.plug.testing.case import ControllerCase
 
+from pluton.application.testing import ControllerCase
 from pluton.dashboard.controllers import Dashboard
 
 
