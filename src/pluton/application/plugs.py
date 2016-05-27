@@ -12,15 +12,25 @@ class PluggedMixin(object):
 
     def create_plugs(self):
         super().create_plugs()
-        self.endpoints = self.add_plug(EndpointDriver)
-        self.events = self.add_plug(EventDriver)
-        self.reaction_links = self.add_plug(ReactionLinkDriver)
-        self.forms = self.add_plug(FormskitPlug)
-        self.database = self.add_plug(DatabasePlug)
+        self.endpoints = EndpointDriver()
+        self.events = EventDriver()
+        self.reaction_links = ReactionLinkDriver()
+        self.forms = FormskitPlug()
+        self.database = DatabasePlug()
+
+        self.setup_plugs(
+            self.endpoints,
+            self.events,
+            self.reaction_links,
+            self.forms,
+            self.database,
+        )
 
 
 class RequestPluggedMixin(PluggedMixin):
 
     def create_plugs(self):
         super().create_plugs()
-        self.add_plug(PlutonFanstaticPlug)
+        self.setup_plugs(
+            PlutonFanstaticPlug(),
+        )

@@ -14,14 +14,19 @@ class ReactionRunner(Plug):
 
     def create_plugs(self):
         super().create_plugs()
-        self.reaction_links = self.add_plug(ReactionLinkDriver)
-        self.database = self.add_plug(DatabasePlug)
+        self.reaction_links = ReactionLinkDriver()
+        self.database = DatabasePlug()
 
-        self.add_reaction_cls(PrintEvent)
-        self.add_reaction_cls(DiskCheckReaction)
+        self.add_reaction(PrintEvent())
+        self.add_reaction(DiskCheckReaction())
 
-    def add_reaction_cls(self, cls):
-        reaction = self.add_plug(cls)
+        self.setup_plugs(
+            self.reaction_links,
+            self.database,
+            *self.reactions.values(),
+        )
+
+    def add_reaction(self, reaction):
         self.reactions[reaction.name] = reaction
 
     def react_for_event(self, event):

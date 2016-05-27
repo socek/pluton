@@ -8,7 +8,10 @@ class BaseDatabaseCase(BasePlugableCase):
 
     def create_plugs(self):
         super().create_plugs()
-        self.database = self.add_plug(DatabasePlug)
+        self.database = DatabasePlug()
+        self.setup_plugs(
+            self.database,
+        )
 
     @cache
     def object(self, *args, **kwargs):

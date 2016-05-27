@@ -8,7 +8,11 @@ class FormskitPlug(RequestPlug):
 
     def create_plugs(self):
         super().create_plugs()
-        self.utils = self.add_plug(ControllerUtils)
+        self.utils = ControllerUtils()
+
+        self.setup_plugs(
+            self.utils,
+        )
 
     def add_raw_form(self, formcls, *args, **kwargs):
         return formcls(self, *args, **kwargs)

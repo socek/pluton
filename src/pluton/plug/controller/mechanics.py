@@ -12,7 +12,11 @@ class ControllerMechanics(RequestPlug):
         self.response = None
 
     def create_plugs(self):
-        self.utils = self.add_plug(ControllerUtils)
+        self.utils = ControllerUtils()
+
+        self.setup_plugs(
+            self.utils,
+        )
 
     def feed_request(self, request):
         self.application = request.registry['application']

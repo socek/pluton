@@ -8,7 +8,11 @@ class BaseWidget(Widget):
 
     def create_plugs(self):
         super().create_plugs()
-        self.jinja2 = self.add_plug(Jinja2Plug)
+        self.jinja2 = Jinja2Plug()
+
+        self.setup_plugs(
+            self.jinja2,
+        )
 
     def render(self, renderer):
         template = self.jinja2.env.get_template(renderer)

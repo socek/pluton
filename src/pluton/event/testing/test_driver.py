@@ -11,8 +11,13 @@ class TestEventDriver(DatabaseCase):
 
     def create_plugs(self):
         super().create_plugs()
-        self.endpoints = self.add_plug(EndpointDriver)
-        self.reactions = self.add_plug(ReactionLinkDriver)
+        self.endpoints = EndpointDriver()
+        self.reactions = ReactionLinkDriver()
+
+        self.setup_plugs(
+            self.endpoints,
+            self.reactions,
+        )
 
     @cache
     def endpoint(self):

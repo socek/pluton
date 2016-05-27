@@ -14,7 +14,11 @@ class Controller(RequestPlug):
 
     def create_plugs(self):
         super().create_plugs()
-        self.utils = self.add_plug(ControllerUtils)
+        self.utils = ControllerUtils()
+
+        self.setup_plugs(
+            self.utils,
+        )
 
     def feed_request(self, request):
         self.application = request.registry['application']

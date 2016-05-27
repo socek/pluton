@@ -7,7 +7,10 @@ from .plug import DatabasePlug
 class Driver(Plug):
 
     def create_plugs(self):
-        self.database = self.add_plug(DatabasePlug)
+        self.database = DatabasePlug()
+        self.setup_plugs(
+            self.database,
+        )
 
     @property
     def query(self):

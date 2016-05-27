@@ -15,11 +15,17 @@ class BasePlug(object):
             self._plugs = getattr(self, '_plugs', OrderedDict())
             return self
 
-    def add_plug(self, cls):
-        if cls.__name__ not in self.plugs:
-            self.plugs[cls.__name__] = cls()
-            self.plugs[cls.__name__].feed_parent(self)
-        return self.plugs[cls.__name__]
+    def setup_plugs(self, *plugs):
+        for plug in plugs:
+            name = plug.__class__.__name__
+            if name in self.plugs:
+                # This is so magic I felt dirty writing this.
+                # To Plug system to work, we need to have single Plug object,
+                # not many.
+                plug.__dict__ = self.plugs[name].__dict__
+            else:
+                plug.feed_parent(self)
+                self.plugs[name] = plug
 
     def feed_parent(self, parent):
         self.parent = parent

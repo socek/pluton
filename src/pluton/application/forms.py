@@ -8,4 +8,7 @@ class Form(PluggedMixin, PostForm):
 
     def create_plugs(self):
         super().create_plugs()
-        self.reactions = self.add_plug(ReactionRunner)
+        self.reactions = ReactionRunner()
+        self.setup_plugs(
+            self.reactions,
+        )
