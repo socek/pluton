@@ -5,6 +5,7 @@ class BasePlug(object):
 
     @property
     def plugs(self):
+        self._plugs = getattr(self, '_plugs', OrderedDict())
         return self.main._plugs
 
     @property
@@ -12,20 +13,18 @@ class BasePlug(object):
         if getattr(self, 'parent', None):
             return self.parent.main
         else:
-            self._plugs = getattr(self, '_plugs', OrderedDict())
+            self._request_cache = getattr(self, '_request_cache', {})
             return self
+
+    @property
+    def request_cache(self):
+        return self.main._request_cache
 
     def setup_plugs(self, *plugs):
         for plug in plugs:
             name = plug.__class__.__name__
-            if name in self.plugs:
-                # This is so magic I felt dirty writing this.
-                # To Plug system to work, we need to have single Plug object,
-                # not many.
-                plug.__dict__ = self.plugs[name].__dict__
-            else:
-                plug.feed_parent(self)
-                self.plugs[name] = plug
+            plug.feed_parent(self)
+            self.plugs[name] = plug
 
     def feed_parent(self, parent):
         self.parent = parent
