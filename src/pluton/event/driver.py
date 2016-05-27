@@ -21,6 +21,7 @@ class EventDriver(ModelDriver):
         arg=None,
     ):
         group = self.upsert(endpoint_id, name, arg)
+        group.state = state
 
         event = Event()
         event.raw = raw
@@ -84,4 +85,4 @@ class EventDriver(ModelDriver):
                 ReactionLink.event_group_id == group_id
             )
             .scalar()
-        )
+        ) or 0

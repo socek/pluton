@@ -16,3 +16,4 @@ class ReactionLink(Model):
 
     event_group_id = Column(Integer, ForeignKey('event_groups.id'), nullable=False)
     event_group = relationship('EventGroup')
+

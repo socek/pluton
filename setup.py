@@ -29,6 +29,7 @@ install_requires = [
     'uwsgi',
     'pytest',
     'pytest-cov',
+    'freezegun',
 ]
 
 
