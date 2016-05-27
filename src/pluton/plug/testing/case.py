@@ -7,15 +7,7 @@ from .dict import MockedDict
 from pluton.plug.plug import BasePlug
 
 
-class BaseTestCase(BasePlug):
-
-    _object_cls = None
-    _application = None
-
-    @cache('session')
-    def get_application(self):
-        self._application.run_tests()
-        return self._application
+class TestHelpersMixin(object):
 
     @fixture(autouse=True)
     def pytest_setup(self, request):
@@ -23,8 +15,6 @@ class BaseTestCase(BasePlug):
         request.addfinalizer(self.tearDown)
 
     def setUp(self):
-        self.do_init()
-        self.feed_parent(self.get_application())
         self._test_cache = {}
         self._patchers = []
 
@@ -46,6 +36,22 @@ class BaseTestCase(BasePlug):
         patcher = patch.dict(*args, **kwargs)
         self._patchers.append(patcher)
         return patcher.start()
+
+
+class BaseTestCase(BasePlug, TestHelpersMixin):
+
+    _object_cls = None
+    _application = None
+
+    def setUp(self):
+        super().setUp()
+        self.do_init()
+        self.feed_parent(self.get_application())
+
+    @cache('session')
+    def get_application(self):
+        self._application.run_tests()
+        return self._application
 
     @cache
     def object(self, *args, **kwargs):

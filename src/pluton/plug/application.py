@@ -26,20 +26,25 @@ class Application(object):
     def create_plugs(self):
         pass
 
-    def __call__(self, settings={}):
+    def __call__(self, settings=None):
+        settings = settings or {}
         return self.run_uwsgi(settings)
 
-    def run_uwsgi(self, settings={}):
+    def run_uwsgi(self, settings=None):
+        settings = settings or {}
         self._create_app(settings, 'uwsgi')
         return self._return_wsgi_app()
 
-    def run_tests(self, settings={}):
+    def run_tests(self, settings=None):
+        settings = settings or {}
         self._create_app(settings, 'tests')
 
-    def run_shell(self, settings={}):
+    def run_shell(self, settings=None):
+        settings = settings or {}
         self._create_app(settings, 'shell')
 
-    def run_command(self, settings={}):
+    def run_command(self, settings=None):
+        settings = settings or {}
         self._create_app(settings, 'command')
 
     def _create_app(self, settings={}, settings_name='uwsgi'):
