@@ -1,6 +1,9 @@
 from pluton.application.testing import DatabaseCase
 
 from ..driver import EndpointDriver
+from pluton.event.models import Event
+from pluton.event.models import EventGroup
+from pluton.reactions.models import ReactionLink
 
 
 class TestEndpointDriver(DatabaseCase):
@@ -25,3 +28,9 @@ class TestEndpointDriver(DatabaseCase):
 
         result = self.object().get_by_api(endpoint.api_key, endpoint.api_secret)
         assert result == endpoint
+
+    def reset_table(self):
+        self.database().query(ReactionLink).delete()
+        self.database().query(Event).delete()
+        self.database().query(EventGroup).delete()
+        super().reset_table()
