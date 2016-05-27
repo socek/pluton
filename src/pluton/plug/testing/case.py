@@ -45,7 +45,6 @@ class BaseTestCase(BasePlug, TestHelpersMixin):
 
     def setUp(self):
         super().setUp()
-        self.do_init()
         self.feed_parent(self.get_application())
 
     @cache('session')

@@ -3,10 +3,6 @@ from collections import OrderedDict
 
 class BasePlug(object):
 
-    def do_init(self):
-        self.parent = None
-        self._plugs = OrderedDict()
-
     @property
     def plugs(self):
         return self.main._plugs
@@ -16,6 +12,7 @@ class BasePlug(object):
         if getattr(self, 'parent', None):
             return self.parent.main
         else:
+            self._plugs = getattr(self, '_plugs', OrderedDict())
             return self
 
     def add_plug(self, cls):
@@ -46,10 +43,7 @@ class BasePlug(object):
 
 
 class Plug(BasePlug):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.do_init()
+    pass
 
 
 class RequestPlug(Plug):
