@@ -1,7 +1,7 @@
 from collections import OrderedDict
 
 
-class BasePlug(object):
+class Plug(object):
 
     @property
     def plugs(self):
@@ -45,10 +45,6 @@ class BasePlug(object):
     @property
     def paths(self):
         return self.application.paths
-
-
-class Plug(BasePlug):
-    pass
 
 
 class RequestPlug(Plug):

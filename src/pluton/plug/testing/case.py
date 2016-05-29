@@ -4,7 +4,7 @@ from pytest import fixture
 
 from .cache import cache
 from .dict import MockedDict
-from pluton.plug.plug import BasePlug
+from pluton.plug.plug import Plug
 
 
 class TestHelpersMixin(object):
@@ -38,7 +38,7 @@ class TestHelpersMixin(object):
         return patcher.start()
 
 
-class BaseTestCase(BasePlug, TestHelpersMixin):
+class BaseTestCase(Plug, TestHelpersMixin):
 
     _object_cls = None
     _application = None
