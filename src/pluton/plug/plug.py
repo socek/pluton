@@ -6,7 +6,7 @@ class Plug(object):
     @property
     def plugs(self):
         self._plugs = getattr(self, '_plugs', OrderedDict())
-        return self.main._plugs
+        return self._plugs
 
     @property
     def main(self):

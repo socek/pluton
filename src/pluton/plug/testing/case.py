@@ -71,7 +71,11 @@ class BasePlugableCase(BaseTestCase):
         return obj
 
 
-class BaseRequestCase(BaseTestCase):
+class BaseRequestCase(BasePlugableCase):
+
+    @property
+    def request(self):
+        return self.mrequest()
 
     @cache
     def mrequest(self):

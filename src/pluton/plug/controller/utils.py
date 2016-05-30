@@ -13,7 +13,7 @@ class ControllerUtils(RequestPlug):
             headers=self.request.response.headerlist,
         )
         if quit:
-            raise QuitController(self.response)
+            raise QuitController(self.parent.response)
 
     def add_widget(self, name, obj):
         obj.feed_parent(self)

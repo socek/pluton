@@ -3,8 +3,8 @@ from .plug import RequestPlug
 
 class Widget(RequestPlug):
 
-    def feed_request(self, request):
-        super().feed_request(request)
+    def feed_parent(self, parent):
+        super().feed_parent(parent)
         self._create_context()
 
     def _create_context(self):
@@ -15,5 +15,4 @@ class Widget(RequestPlug):
         }
 
     def add_widget(self, name, obj):
-        obj.feed_request(self.request)
         self.context[name] = obj

@@ -9,5 +9,5 @@ DeclarativeBase = declarative_base()
 class Model(AbstractConcreteBase, DeclarativeBase, Plug):
 
     def __repr__(self):
-        id_ = str(self.id) if self.id else 'None'
+        id_ = str(self.id) if getattr(self, 'id', None) else 'None'
         return '%s (%s)' % (self.__class__.__name__, id_)

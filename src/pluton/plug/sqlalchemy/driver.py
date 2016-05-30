@@ -41,12 +41,13 @@ class ModelDriver(Driver):
         self.database().add(obj)
         return obj
 
-    def delete_by_id(self, id_):
-        self.delete(self.get_by_id(id_))
+    def delete_by_id(self, id):
+        self.delete(self.get_by_id(id))
 
     def delete(self, obj):
         self.database().delete(obj)
 
     def update(self, instance):
-        self.database().merge(instance)
-        self.database().flush()
+        db = self.database()
+        db.merge(instance)
+        db.flush()

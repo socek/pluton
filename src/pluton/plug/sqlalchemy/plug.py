@@ -9,8 +9,9 @@ class DatabasePlug(Plug):
         super().feed_parent(parent)
         if 'expire_all' not in self.request_cache:
             # we want to do expire_all only once per request
-            self().commit()
-            self().expire_all()
+            db = self()
+            db.commit()
+            db.expire_all()
             self.request_cache['expire_all'] = True
 
     def __call__(self):
