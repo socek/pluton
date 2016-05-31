@@ -53,7 +53,6 @@ class FormWidget(MultiWidget):
         data['name'] = self.form.fields[name].get_name()
         data['value'] = self.form.get_value(name, default='')
         data['values'] = self.form.get_values(name)
-        # data['raw'] = self.form.get_raw_value()
         data['field'] = self.form.fields[name]
         data['templates'] = self.Templates
         data['type'] = type
