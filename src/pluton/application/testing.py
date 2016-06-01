@@ -1,4 +1,5 @@
 from pluton.plug.sqlalchemy.testing import BaseDatabaseCase
+from pluton.plug.testing.cache import cache
 from pluton.plug.testing.case import BaseControllerCase
 from pluton.plug.testing.case import BasePlugableCase
 from pluton.plug.testing.case import BaseRequestCase
@@ -24,7 +25,10 @@ class ControllerCase(TestConfigurationMixin, BaseControllerCase):
 
 
 class PlugableCase(TestConfigurationMixin, BasePlugableCase):
-    pass
+
+    @cache
+    def mdatabase(self):
+        return self.pobject(self.object(), 'database')
 
 
 class DatabaseCase(TestConfigurationMixin, BaseDatabaseCase):

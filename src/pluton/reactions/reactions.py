@@ -5,13 +5,6 @@ from pluton.plug.plug import Plug
 class Reaction(PluggedMixin, Plug):
     name = None
 
-    @property
-    def raw(self):
-        return self.event.raw
-
-    def react(self, event):
-        pass
-
 
 class PrintEvent(Reaction):
     name = 'print_event'

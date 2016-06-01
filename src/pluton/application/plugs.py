@@ -15,14 +15,12 @@ class PluggedMixin(object):
         self.endpoints = EndpointDriver()
         self.events = EventDriver()
         self.reaction_links = ReactionLinkDriver()
-        self.forms = FormskitPlug()
         self.database = DatabasePlug()
 
         self.setup_plugs(
             self.endpoints,
             self.events,
             self.reaction_links,
-            self.forms,
             self.database,
         )
 
@@ -31,6 +29,8 @@ class RequestPluggedMixin(PluggedMixin):
 
     def create_plugs(self):
         super().create_plugs()
+        self.forms = FormskitPlug()
         self.setup_plugs(
             PlutonFanstaticPlug(),
+            self.forms,
         )
