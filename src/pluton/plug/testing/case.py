@@ -163,3 +163,10 @@ class BaseControllerCase(BaseRequestCase):
             self.object(),
             'add_widget',
         )
+
+    @cache
+    def mutils(self):
+        return self.pobject(
+            self.object(),
+            'utils',
+        )

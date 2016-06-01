@@ -1,3 +1,4 @@
+from pluton.plug.formskit.testing import BaseFormCase
 from pluton.plug.sqlalchemy.testing import BaseDatabaseCase
 from pluton.plug.testing.cache import cache
 from pluton.plug.testing.case import BaseControllerCase
@@ -10,6 +11,18 @@ from pluton.application.app import main
 
 class TestConfigurationMixin(object):
     _application = main
+
+    @cache
+    def mreaction_links(self):
+        return self.pobject(self.object(), 'reaction_links')
+
+    @cache
+    def mdatabase(self):
+        return self.pobject(self.object(), 'database')
+
+    @cache
+    def mevents(self):
+        return self.pobject(self.object(), 'events')
 
 
 class TestCase(TestConfigurationMixin, BaseTestCase):
@@ -25,11 +38,12 @@ class ControllerCase(TestConfigurationMixin, BaseControllerCase):
 
 
 class PlugableCase(TestConfigurationMixin, BasePlugableCase):
-
-    @cache
-    def mdatabase(self):
-        return self.pobject(self.object(), 'database')
+    pass
 
 
 class DatabaseCase(TestConfigurationMixin, BaseDatabaseCase):
+    pass
+
+
+class FormCase(TestConfigurationMixin, BaseFormCase):
     pass

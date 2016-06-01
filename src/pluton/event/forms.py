@@ -25,5 +25,6 @@ class AddReactionForm(Form):
             self.matchdict['event_group_id'],
             data['name'],
         )
-        self.database().add(reaction)
-        self.database().flush()
+        db = self.database()
+        db.add(reaction)
+        db.flush()
