@@ -30,5 +30,3 @@ class ShowEndpoint(EndpointController):
         endpoint = self.fetch_endpoint()
         widget = EndpointSummaryWidget(endpoint)
         self.utils.add_widget('endpoint', widget)
-
-

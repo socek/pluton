@@ -24,6 +24,18 @@ class TestConfigurationMixin(object):
     def mevents(self):
         return self.pobject(self.object(), 'events')
 
+    @cache
+    def mforms(self):
+        return self.pobject(self.object(), 'forms')
+
+    @cache
+    def mendpoints(self):
+        return self.pobject(self.object(), 'endpoints')
+
+    @cache
+    def mreactions(self):
+        return self.pobject(self.object(), 'reactions')
+
 
 class TestCase(TestConfigurationMixin, BaseTestCase):
     pass

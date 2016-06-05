@@ -9,9 +9,10 @@ class CreateEndpointForm(Form):
         self.add_field('name', label='Nazwa', validators=[NotEmpty()])
 
     def on_success(self):
+        db = self.database()
         data = self.get_data_dict(True)
         event = self.endpoints.create(
             data['name'],
         )
-        self.database().add(event)
-        self.database().flush()
+        db.add(event)
+        db.flush()

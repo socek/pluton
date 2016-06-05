@@ -28,6 +28,7 @@ class AddEventForm(Form):
         self.add_form_validator(EndpointExistsValidator())
 
     def on_success(self):
+        db = self.database()
         data = self.get_data_dict(True)
         event = self.events.create_event(
             self.endpoint.id,
@@ -37,8 +38,8 @@ class AddEventForm(Form):
             data['arg'],
         )
         event.group.is_hidden = False
-        self.database().add(event)
-        self.database().flush()
+        db.add(event)
+        db.flush()
         self.reactions.react_for_event(event)
 
     def _get_form_data(self):

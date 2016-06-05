@@ -45,6 +45,8 @@ class AddReaction(Controller):
 class RemoveReaction(JsonController):
 
     def make(self):
+        db = self.database()
+
         reaction = self.reaction_links.get_by_id(
             id=self.matchdict['reaction_id']
         )
@@ -52,5 +54,5 @@ class RemoveReaction(JsonController):
             'events:edit',
             event_group_id=reaction.event_group_id,
         )
-        self.database().delete(reaction)
-        self.database().commit()
+        db.delete(reaction)
+        db.commit()
