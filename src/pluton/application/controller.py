@@ -1,5 +1,6 @@
 from pluton.plug.controller import Controller as BaseController
 from pluton.plug.controller import JsonController as BaseJsonController
+from pluton.plug.formskit.plug import FormskitPlug
 from pluton.reactions.plugs import ReactionRunner
 
 from .plugs import PluggedMixin
@@ -22,4 +23,11 @@ class Controller(RequestPluggedMixin, PluggedController):
 
 
 class JsonController(PluggedController, BaseJsonController):
-    pass
+
+    def create_plugs(self):
+        super().create_plugs()
+        self.forms = FormskitPlug()
+
+        self.setup_plugs(
+            self.forms,
+        )
