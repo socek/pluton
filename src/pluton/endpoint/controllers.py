@@ -1,5 +1,6 @@
 from pluton.application.controller import Controller
 
+from .widgets import ConfigureEndpointFormWidget
 from .widgets import CreateEndpointFormWidget
 from .widgets import EndpointSummaryWidget
 
@@ -40,3 +41,15 @@ class ConfigureEndpoint(EndpointController):
 
     def make(self):
         self.context['endpoint_id'] = self.get_endpoint_id()
+
+        form = self.forms.add_form_widget(
+            ConfigureEndpointFormWidget,
+            endpoint_id=self.get_endpoint_id(),
+        )
+
+        if form.validate():
+            self.utils.redirect(
+                'endpoints:show',
+                endpoint_id=self.get_endpoint_id(),
+            )
+            self.database().commit()

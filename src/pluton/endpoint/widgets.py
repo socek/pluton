@@ -1,6 +1,7 @@
 from pluton.application.widget import FormWidget
 from pluton.application.widget import SingleWidget
 
+from .forms import ConfigureEndpointForm
 from .forms import CreateEndpointForm
 
 
@@ -36,3 +37,8 @@ class EndpointRowWidget(SingleWidget):
 class CreateEndpointFormWidget(FormWidget):
     template = 'pluton.endpoint:templates/widgets/create_form.haml'
     form = CreateEndpointForm
+
+
+class ConfigureEndpointFormWidget(FormWidget):
+    template = 'pluton.endpoint:templates/widgets/configure.haml'
+    form = ConfigureEndpointForm
