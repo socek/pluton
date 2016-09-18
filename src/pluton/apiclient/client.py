@@ -21,7 +21,7 @@ class ApiClient(object):
             data,
         )
 
-    def add_event(self, name, state, raw, arg=None, **kwargs):
+    def send_event(self, name, state, raw, arg=None, **kwargs):
         data = {
             'form_name': 'AddEventForm',
             'name': name,

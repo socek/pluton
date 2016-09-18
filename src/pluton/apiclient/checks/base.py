@@ -10,7 +10,7 @@ class Check(object):
 
     def send(self):
         raw = self.check(self.arg)
-        self.api.add_event(self.name, 'normal', raw, arg=self.arg)
+        self.api.send_event(self.name, 'normal', raw, arg=self.arg)
 
     def configure(self):
         ConfigFile(self.config_file).add_event(self.name, self.arg)

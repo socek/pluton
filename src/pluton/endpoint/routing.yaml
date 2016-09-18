@@ -7,4 +7,7 @@ pluton.endpoint.controllers:
     controller: ShowEndpoint
     route: endpoints:show
     url: /endpoint/{endpoint_id:\d+}/
-
+  -
+    controller: ConfigureEndpoint
+    route: endpoints:configure
+    url: /endpoint/{endpoint_id:\d+}/configure/

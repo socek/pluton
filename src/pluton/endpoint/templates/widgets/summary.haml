@@ -13,6 +13,11 @@
           Api Secret
         %td
           %input type="text" value="{{api_secret}}"
+      %tr
+        %td
+          Actions
+        %td
+          %a.glyphicon.glyphicon-cog href="{{route_path('endpoints:configure', endpoint_id=endpoint_id)}}" class="btn btn-danger btn-xs" title="Configure Endpoint"
 
   %table.table.table-striped.table-bordered.table-hover.table-condensed
     %thead

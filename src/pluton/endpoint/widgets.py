@@ -16,6 +16,7 @@ class EndpointSummaryWidget(SingleWidget):
         self.context['api_secret'] = self.endpoint.api_secret
         self.context['events'] = self.events.list_latest(self.endpoint.id)
         self.context['get_reactions'] = self.get_reactions
+        self.context['endpoint_id'] = self.endpoint.id
 
     def get_reactions(self, group_id):
         return self.events.get_reaction_count(group_id)

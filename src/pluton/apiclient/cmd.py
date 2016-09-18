@@ -46,8 +46,10 @@ class Command(object):
                 '{"txt": "This is text", "msg": "This is message"}',
             )
         elif self.args.config and check:
+            print("Saving check config...")
             check.configure()
         elif check:
+            print("Sending check...")
             check.send()
         else:
             self.parser.print_help()
