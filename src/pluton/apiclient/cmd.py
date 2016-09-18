@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 
 from pluton.apiclient.client import ApiClient
+from pluton.apiclient.checks.disk import DiskCheck
 
 
 class Command(object):
@@ -21,8 +22,21 @@ class Command(object):
             help='Send disk data',
         )
 
+        self.parser.add_argument(
+            '-c',
+            '--config',
+            dest='config',
+            help='Create config file for server',
+            action='store_true',
+        )
+
+    def get_check(self):
+        if self.args.disk:
+            return DiskCheck(self.client(), self.args.disk)
+
     def run(self):
         self.args = self.parser.parse_args()
+        check = self.get_check()
 
         if self.args.name:
             method = getattr(self.client(), self.args.name)
@@ -31,8 +45,10 @@ class Command(object):
                 'normal',
                 '{"txt": "This is text", "msg": "This is message"}',
             )
-        elif self.args.disk:
-            self.client().send_disk_chack(self.args.disk)
+        elif self.args.config and check:
+            check.configure()
+        elif check:
+            check.send()
         else:
             self.parser.print_help()
 
