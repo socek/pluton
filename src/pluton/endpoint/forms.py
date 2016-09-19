@@ -32,11 +32,11 @@ class ConfigureEndpointForm(Form):
         data = self.get_data_dict(True)
         data = load(data['server'].file)
         for event in data['events']:
-            group = self.events.create_event(
+            event = self.events.create_event(
                 self.endpoint_id,
                 event['name'],
                 raw=None,
                 state='normal',
                 arg=event['arg'],
             )
-            group.is_hidden = False
+            event.group.is_hidden = False
