@@ -1,9 +1,12 @@
+from pytest import raises
+
 from pluton.application.testing import DatabaseCase
+from pluton.endpoint.driver import EndpointDriver
 from pluton.plug.testing.cache import cache
+from pluton.reactions.driver import ReactionLinkDriver
 
 from ..driver import EventDriver
-from pluton.endpoint.driver import EndpointDriver
-from pluton.reactions.driver import ReactionLinkDriver
+from ..errors import GroupBlockedError
 
 
 class TestEventDriver(DatabaseCase):
@@ -42,6 +45,27 @@ class TestEventDriver(DatabaseCase):
         assert event.group.arg == 'argg'
         assert event.group.state == 'critical'
         assert event.group.id is not None
+        assert event.group.is_blocked is False
+
+    def test_create_event_on_blocked_group(self):
+        endpoint_id = self.endpoint().id
+        group = self.object().upsert(
+            endpoint_id,
+            'event name',
+            'argg'
+        )
+        group.is_blocked = True
+
+        self.database().flush()
+
+        with raises(GroupBlockedError):
+            self.object().create_event(
+                endpoint_id,
+                'event name',
+                'raw',
+                'critical',
+                'argg',
+            )
 
     def test_list_latest(self):
 

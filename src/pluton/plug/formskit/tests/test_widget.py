@@ -101,6 +101,44 @@ class TestFormWidget(RequestCase):
             },
         )
 
+    def test_file(self):
+        name = 'myname'
+        field = MagicMock()
+        form = self.mform()
+        form.fields = {
+            name: field,
+        }
+        render_for = self.mrender_for()
+        obj = self.object()
+
+        obj.file(name, disabled='disabled-val', autofocus='autofocus-val')
+
+        field.get_name.assert_called_once_with()
+        field.get_error_messages.assert_called_once_with()
+        field.get_value_errors.assert_called_once_with(default=[])
+        form.get_value.assert_called_once_with(name, default='')
+        form.get_values.assert_called_once_with(name)
+
+        render_for.assert_called_once_with(
+            'pluton.plug.formskit:templates/file.jinja2',
+            {
+                'name': field.get_name.return_value,
+                'value': form.get_value.return_value,
+                'values': form.get_values.return_value,
+                'field': field,
+                'templates': obj.Templates,
+                'type': type,
+                'str': str,
+                'id': obj.get_tag_id(name),
+                'label': field.label,
+                'error': field.error,
+                'messages': field.get_error_messages.return_value,
+                'value_messages': field.get_value_errors.return_value,
+                'disabled': 'disabled-val',
+                'autofocus': 'autofocus-val',
+            },
+        )
+
     def test_password(self):
         name = 'myname'
         field = MagicMock()

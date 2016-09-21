@@ -3,9 +3,11 @@ from mock import sentinel
 from pluton.application.testing import ControllerCase
 from pluton.plug.testing.cache import cache
 
+from ..controllers import ConfigureEndpoint
 from ..controllers import CreateEndpoint
 from ..controllers import ShowEndpoint
 from ..widgets import CreateEndpointFormWidget
+from ..widgets import ConfigureEndpointFormWidget
 
 
 class TestShowEndpoint(ControllerCase):
@@ -66,3 +68,43 @@ class TestCreateEndpoint(ControllerCase):
         add_form.assert_called_once_with(CreateEndpointFormWidget)
         add_form.return_value.validate.assert_called_once_with()
         assert not redirect.called
+
+
+class TestConfigureEndpoint(ControllerCase):
+    _object_cls = ConfigureEndpoint
+
+    def test_make_on_get(self):
+        self.matchdict()['endpoint_id'] = sentinel.endpoint_id
+        add_form = self.mforms().add_form_widget
+        add_form.return_value.validate.return_value = False
+        redirect = self.mutils().redirect
+
+        self.object().make()
+
+        add_form.assert_called_once_with(
+            ConfigureEndpointFormWidget,
+            endpoint_id=sentinel.endpoint_id,
+        )
+        add_form.return_value.validate.assert_called_once_with()
+        assert not redirect.called
+
+    def test_make_on_post(self):
+        self.matchdict()['endpoint_id'] = sentinel.endpoint_id
+        add_form = self.mforms().add_form_widget
+        add_form.return_value.validate.return_value = True
+        redirect = self.mutils().redirect
+        self.mdatabase()
+
+        self.object().make()
+
+        add_form.assert_called_once_with(
+            ConfigureEndpointFormWidget,
+            endpoint_id=sentinel.endpoint_id,
+        )
+        add_form.return_value.validate.assert_called_once_with()
+        redirect.assert_called_once_with(
+            'endpoints:show',
+            endpoint_id=sentinel.endpoint_id,
+        )
+        self.mdatabase().assert_called_once_with()
+        self.mdatabase().return_value.commit.assert_called_once_with()

@@ -22,6 +22,7 @@ class EventDriver(ModelDriver):
         arg=None,
     ):
         group = self.upsert(endpoint_id, name, arg)
+        print(group.is_blocked)
         if group.is_blocked:
             raise GroupBlockedError()
         group.state = state

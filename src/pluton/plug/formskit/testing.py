@@ -5,8 +5,8 @@ from pluton.plug.testing.case import BaseRequestCase
 class BaseFormCase(BaseRequestCase):
 
     @cache
-    def object(self):
-        return super().object(self)
+    def object(self, *args, **kwargs):
+        return super().object(self, *args, **kwargs)
 
     @cache
     def mget_data_dict(self):
