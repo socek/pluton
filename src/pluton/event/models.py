@@ -20,6 +20,7 @@ class EventGroup(Model):
     arg = Column(String)
     state = Column(String, nullable=False, default='normal')
     is_hidden = Column(Boolean, default=False)
+    is_blocked = Column(Boolean, default=False)
     reaction_data = Column(JSON)
     description = Column(String)
 

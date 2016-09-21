@@ -47,6 +47,7 @@ class TestFormWidget(RequestCase):
                 'name': form.get_name.return_value,
                 'style': 'mystyle',
                 'class': 'htmlclass',
+                'enctype': None,
             }
         )
 
