@@ -1,9 +1,10 @@
 from collections import defaultdict
-from sqlalchemy import func
 from pluton.plug.sqlalchemy.driver import ModelDriver
+from sqlalchemy import func
 
 from pluton.reactions.models import ReactionLink
 
+from .errors import GroupBlockedError
 from .models import Event
 from .models import EventGroup
 
@@ -21,6 +22,9 @@ class EventDriver(ModelDriver):
         arg=None,
     ):
         group = self.upsert(endpoint_id, name, arg)
+        print(group.is_blocked)
+        if group.is_blocked:
+            raise GroupBlockedError()
         group.state = state
 
         event = Event()

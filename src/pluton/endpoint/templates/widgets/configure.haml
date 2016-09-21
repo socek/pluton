@@ -1,0 +1,6 @@
+=widget.begin(htmlcls='form-horizontal', enctype='multipart/form-data')
+  %fieldset
+    =widget.file("server")
+    -block submit
+      =widget.submit("Dodaj")
+

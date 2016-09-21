@@ -28,6 +28,7 @@ class TestEndpointSummaryWidget(RequestCase):
 
         assert obj.context == {
             'endpoint_name': endpoint.name,
+            'endpoint_id': endpoint.id,
             'api_key': endpoint.api_key,
             'api_secret': endpoint.api_secret,
             'events': events.list_latest.return_value,

@@ -19,6 +19,7 @@ class FormWidget(MultiWidget):
         select = 'pluton.plug.formskit:templates/select.jinja2'
         hidden = 'pluton.plug.formskit:templates/hidden.jinja2'
         submit = 'pluton.plug.formskit:templates/submit.jinja2'
+        file = 'pluton.plug.formskit:templates/file.jinja2'
 
     def __init__(self, form):
         super().__init__()
@@ -27,13 +28,14 @@ class FormWidget(MultiWidget):
     def get_tag_id(self, name):
         return '%s_%s' % (self.form.get_name(), name)
 
-    def begin(self, tagid=None, style=None, htmlcls=None):
+    def begin(self, tagid=None, style=None, htmlcls=None, enctype=None):
         data = {}
         data['action'] = getattr(self.form, 'action', None)
         data['id'] = tagid
         data['name'] = self.form.get_name()
         data['style'] = style
         data['class'] = htmlcls
+        data['enctype'] = enctype
         return self.render_for(self.Templates.begin, data)
 
     def end(self):
@@ -103,6 +105,9 @@ class FormWidget(MultiWidget):
         data['error'] = True if self.form.success is False else False
         data['messages'] = self.form.get_error_messages()
         return self.render_for(self.Templates.form_error, data)
+
+    def file(self, name, disabled=False, autofocus=False):
+        return self._input('file', name, disabled, autofocus)
 
     def __call__(self, *args, **kwargs):
         data = {}

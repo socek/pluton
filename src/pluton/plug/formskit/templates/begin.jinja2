@@ -8,6 +8,7 @@
         class="{{class}}"
     {%- endif -%}
     {%- if id %} id="{{id}}"{% endif -%}
+    {%- if enctype %} enctype="{{enctype}}"{% endif -%}
     >
     <input type="hidden" name="form_name" value="{{name}}" />
     {{widget.csrf_token()}}
