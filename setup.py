@@ -30,6 +30,7 @@ install_requires = [
     'pytest',
     'pytest-cov',
     'freezegun',
+    'raven',
 ]
 
 

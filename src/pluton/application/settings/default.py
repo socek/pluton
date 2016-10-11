@@ -39,6 +39,7 @@ def database(settings, paths):
 def project(settings, paths):
     paths.set_path('maindir', 'project', '../..')
     paths.set_path('data', 'maindir', 'data')
+    paths.set_path('frontend', 'data', 'frontend.ini')
 
     paths.set_path('application', 'project', 'application')
     paths.set_path('routing', 'application', 'routing.yaml')

@@ -1,6 +1,7 @@
 from pluton.application.widget import FormWidget
 from pluton.application.widget import SingleWidget
 
+from .forms import ConfigureEndpointForm
 from .forms import CreateEndpointForm
 
 
@@ -16,6 +17,7 @@ class EndpointSummaryWidget(SingleWidget):
         self.context['api_secret'] = self.endpoint.api_secret
         self.context['events'] = self.events.list_latest(self.endpoint.id)
         self.context['get_reactions'] = self.get_reactions
+        self.context['endpoint_id'] = self.endpoint.id
 
     def get_reactions(self, group_id):
         return self.events.get_reaction_count(group_id)
@@ -35,3 +37,8 @@ class EndpointRowWidget(SingleWidget):
 class CreateEndpointFormWidget(FormWidget):
     template = 'pluton.endpoint:templates/widgets/create_form.haml'
     form = CreateEndpointForm
+
+
+class ConfigureEndpointFormWidget(FormWidget):
+    template = 'pluton.endpoint:templates/widgets/configure.haml'
+    form = ConfigureEndpointForm

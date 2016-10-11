@@ -1,0 +1,2 @@
+class GroupBlockedError(Exception):
+    pass
