@@ -1,4 +1,5 @@
 from pluton.application.controller import Controller
+from pluton.plug.testing.cache import cache
 
 from .widgets import ConfigureEndpointFormWidget
 from .widgets import CreateEndpointFormWidget
@@ -10,7 +11,9 @@ class EndpointController(Controller):
     def get_endpoint_id(self):
         return self.matchdict['endpoint_id']
 
-    def fetch_endpoint(self):
+    @property
+    @cache
+    def endpoint(self):
         endpoint_id = self.get_endpoint_id()
         endpoint = self.endpoints.get_by_id(endpoint_id)
         self.context['endpoint'] = endpoint
@@ -31,8 +34,7 @@ class ShowEndpoint(EndpointController):
     renderer = 'pluton.endpoint:templates/admin/show.haml'
 
     def make(self):
-        endpoint = self.fetch_endpoint()
-        widget = EndpointSummaryWidget(endpoint)
+        widget = EndpointSummaryWidget(self.endpoint)
         self.utils.add_widget('endpoint', widget)
 
 

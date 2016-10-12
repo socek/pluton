@@ -22,7 +22,9 @@ class PluggedController(PluggedMixin, BaseController):
 
 
 class Controller(RequestPluggedMixin, PluggedController):
-    pass
+
+    def get_breadcrumbs_vars(self):
+        return dict(self.request.matchdict)
 
 
 class JsonController(PluggedController, BaseJsonController):
