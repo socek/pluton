@@ -1,0 +1,5 @@
+%div.col-lg-12
+  -for breadcrumb in breadcrumbs.get_current_crumbs():
+    >>&nbsp;
+    %a href="{{breadcrumb.get_url()}}"
+      =breadcrumb.label
