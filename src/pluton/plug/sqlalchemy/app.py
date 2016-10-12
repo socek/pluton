@@ -1,6 +1,5 @@
 from morfdict import StringDict
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 
 from pluton.plug.app_plug import AppPlug
 
@@ -26,4 +25,3 @@ class SqlAlchemyPlug(AppPlug):
     def generate_registry(self, registry):
         engine = create_engine(self.parent.settings['db:url'])
         registry['db_engine'] = engine
-        registry['db'] = sessionmaker(bind=engine)()

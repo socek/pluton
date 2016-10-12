@@ -15,16 +15,10 @@ class DatabasePlug(Plug):
             self.request_cache['expire_all'] = True
 
     def __call__(self):
-        if self.settings['db']['type'] == 'sqlite':
-            return self._get_sqlite_database()
-        else:
-            return self._get_normal_database()
+        return self._get_database()
 
-    def _get_sqlite_database(self):
+    def _get_database(self):
         if not getattr(self, 'db', None):
             engine = self.registry['db_engine']
             self.db = sessionmaker(bind=engine)()
         return self.db
-
-    def _get_normal_database(self):
-        return self.registry['db']
